@@ -1,0 +1,15 @@
+services:
+  - type: web
+    name: bio-quantum-trading-platform
+    env: python
+    buildCommand: cd backend/bio_quantum_api && pip install -r requirements.txt
+    startCommand: cd backend/bio_quantum_api && python src/main.py
+    plan: free
+    envVars:
+      - key: FLASK_ENV
+        value: production
+      - key: PYTHONPATH
+        value: /opt/render/project/src/backend/bio_quantum_api
+    healthCheckPath: /health
+    autoDeploy: true
+
