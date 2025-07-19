@@ -2,8 +2,9 @@ services:
   - type: web
     name: bio-quantum-trading-platform
     env: python
-    buildCommand: cd backend/bio_quantum_api && pip install -r requirements.txt
-    startCommand: cd backend/bio_quantum_api && python src/main.py
+    buildCommand: pip install -r backend/bio_quantum_api/requirements.txt
+    startCommand: uvicorn src.main:app --host 0.0.0.0 --port 10000
+    workingDir: backend/bio_quantum_api
     plan: free
     envVars:
       - key: FLASK_ENV
@@ -12,4 +13,5 @@ services:
         value: /opt/render/project/src/backend/bio_quantum_api
     healthCheckPath: /health
     autoDeploy: true
+
 
