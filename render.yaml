@@ -2,7 +2,7 @@ services:
   - type: web
     name: bio-quantum-api
     env: node
-    rootDir: backend
+    rootDir: .
     buildCommand: npm install
     startCommand: node apiBridge_with_token_endpoint.cjs
     envVars:
