@@ -1,0 +1,29 @@
+# General
+.DS_Store
+*.log
+*.tmp
+*.bak
+*.swp
+Thumbs.db
+ECHO is on.
+# Python
+__pycache__/
+*.pyc
+venv/
+.venv/
+ECHO is on.
+# Node
+node_modules/
+dist/
+build/
+ECHO is on.
+# IDE
+.idea/
+.vscode/
+ECHO is on.
+# Nested repos / generated
+bio-quantum-deployment/
+bio-quantum-trading-platform-clean/
+ChatGPT/
+"Grok Files/"
+"Manus files/"
