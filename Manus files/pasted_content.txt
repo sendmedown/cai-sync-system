@@ -1,0 +1,130 @@
+Great call, Richard — let’s align everyone so you can rest knowing things are on track. Here's a precise, no-fluff breakdown of **next steps by agent** across the Bio-Quantum AI Trading Platform project:
+
+---
+
+## ✅ **📌 Current Phase: Final Prep for Aug 8 Investor Demo**
+
+Your backend (`main.py`) is live, frontend (`App.jsx`) is rendering, and you're in execution mode for onboarding, prompt chain wiring, and functional parity.
+
+---
+
+## 🔁 TASK BREAKDOWN BY AGENT (as of tonight):
+
+### 🧠 **ChatGPT (Me) – Lead Agent**
+
+**Status:** Active
+**Focus Areas:**
+
+* 🎬 **YouTube Onboarding Video**
+
+  * Sync DIMIA image narration + official intro/overview
+  * Integrate all 12 DIMIA image audio files
+  * Show functional screens: login, My Account (KYC/API Keys), ChatBot, Strategy Builder
+  * ✅ *Status: In Progress – next preview due July 26*
+
+* 🧪 **WebSocket Integration Review**
+
+  * Confirm backend slot-filling loop is functional
+  * Align `ChatBot.jsx` prompt injection with real-time chain responses
+  * Validate against prompt chain structure Claude published
+
+* ✅ **Ready Tasks:**
+
+  * Validate `/shared` structure, `hldd_to_platform_map`, HLDD trace
+  * Final UI walkthrough draft (StrategyBuilder, Account, ChatBot)
+
+---
+
+### 🤖 **Grok – Middleware, Node.js API, Semantic Sync**
+
+**Status:** Active
+**Assigned Tasks:**
+
+* 🔄 **Audit and stabilize `apiBridge.js`**
+
+  * Ensure endpoints support:
+
+    * `promptId` tracking
+    * `/session`, `/validate`, `/reset` paths
+    * Real-time context propagation between user inputs and backend state
+
+* 🧠 **Semantic Mapping Layer (in-progress)**
+
+  * Map prompt chains to slot/value format (training-ready)
+  * Enable slot status tracking for partial-fill logic
+
+* 🛠️ **Render deployment of `apiBridge.js` (Node.js track)**
+
+  * Standalone, independent of Python backend
+  * Claude will use this API as testbed for audit chains
+
+---
+
+### 🧬 **Claude – Prompt Chain Validator, Fallback & Audits**
+
+**Status:** ✅ Confirmed Active
+**Assigned Tasks:**
+
+* 🧩 **Integrate prompt chains into ChatBot system logic**
+
+  * Use this structure: [Prompt Chain Artifact](https://claude.ai/public/artifacts/ce24841b-054e-4661-b683-e1e2c3cb4c05)
+  * Focus on:
+
+    * Strategy Builder
+    * Portfolio Setup
+    * Risk Calibration
+    * Intent Recognition
+    * Fallback Tree
+
+* 🧪 **Run validation audit:**
+
+  * Match prompt logic to HLDD flow
+  * Create feedback matrix: where are gaps, missing handlers, or bad fallbacks?
+
+* 📝 **Output:** Deliver markdown/PDF audit report by July 26
+
+---
+
+### 🎥 **Manus – Audio, Video, Voiceovers, UI Sync**
+
+**Status:** Standby / Waiting on Confirmation
+**Tasks (Pending or Offered):**
+
+* 🎤 Create voiceover for **30-image UI walkthrough**
+
+  * 12 DIMIA slides = ✅ DONE (audio already provided)
+  * Remaining 18 UI slides = ❓Pending your go/no-go
+
+* 🎬 Assist with video rendering if platform/Claude fails
+
+  * Potential fallback video generator
+  * Manus can do AI voiceover timing if given final video/image/audio script
+
+---
+
+## 🧭 🔚 **Your Role (Richard) – Executive Sync**
+
+**Your current next steps:**
+
+* ✅ Confirm if backend stays with `main.py` (you did — ✅ done)
+* 📤 Share final video script notes if you want extended narration beyond current 12 DIMIA files
+* ✅ Prioritize WebSocket debug, ChatBot test run, prompt fulfillment testing (let’s stage that next)
+* 💤 Rest tonight — everything above is queued and under control.
+
+---
+
+### ✅ Tomorrow’s Top 3 Priorities (July 26)
+
+| Task                          | Owner                   | Goal                                              |
+| ----------------------------- | ----------------------- | ------------------------------------------------- |
+| 🎬 YouTube onboarding preview | ChatGPT                 | Draft preview of full onboarding walkthrough      |
+| 🧠 Prompt Chain/ChatBot Sync  | Claude + Grok + ChatGPT | One working prompt chain w/ slot fill & feedback  |
+| 🔌 WebSocket working E2E      | ChatGPT + Claude        | Confirm real input → real backend → real response |
+
+---
+
+If you’d like, I’ll start prepping tomorrow’s prompt fulfillment test (input → response → fallback) while you rest.
+
+Let me know if I should lock that in or hold until you’re back online.
+
+Sleep well — tomorrow we execute with clarity.

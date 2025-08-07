@@ -1,0 +1,93 @@
+Folder PATH listing for volume Local Disk
+Volume serial number is 00000129 9E09:4859
+C:.
+¦   AI_Trading_Platform_Backup_v1.0.tar.gz
+¦   Bio-Quantum_AI_Trading_Platform_-_Production_Deployment_Guide.pdf
+¦   Bio_Quantum_AI_Complete_Voiceover.wav
+¦   Bio_Quantum_AI_Platform_Demo.mp4
+¦   COMPREHENSIVE_PHASE_2_3_PACKAGE_v1.0.tar.gz
+¦   deploy-production.sh
+¦   DIMIA_INTEGRATION_EXPORT_v1.0.tar.gz
+¦   health-check.sh
+¦   Investor Pitch Deck.pdf
+¦   MANUS_SUPPORT_-_PRESENTATION_GENERATION_CREDIT_REFUND_REQUEST.pdf
+¦   PHASE_2_COMPLETION_SUMMARY.pdf
+¦   PHASE_2_DEMO_SCRIPT_PACKAGE_v1.0.tar.gz
+¦   PHASE_3_TESTING_RESULTS.pdf
+¦   production.yml
+¦   Q3 Ai Platform Roadmap.pdf
+¦   TODAY'S FAILURES - CREDIT REFUND REQUEST LOG.md
+¦   unpacked_file_list.txt
+¦   Updated_HLDD_AI_Trading_Platform_2025.docx
+¦   ??_PRIORITY_DEVELOPMENT_FOCUS_-_100%_COMPLETE!_??.pdf
+¦   ??_BIO-QUANTUM_AI_TRADING_PLATFORM_-_COMPLETE_DEPLOYMENT_PACKAGE.pdf
+¦   ??_FULL_DEPLOYMENT_REQUIREMENTS_-_BIO-QUANTUM_AI_TRADING_PLATFORM.pdf
+¦   
++---AI Trading YouTube Video
+¦   ¦   BIO-QUANTUM_AI_TRADING_PLATFORM_-_VIDEO_PRODUCTION_GUIDE.pdf
+¦   ¦   BIO-QUANTUM_AI_TRADING_PLATFORM_-_VIDEO_SCRIPT.pdf
+¦   ¦   Bio_Quantum_AI_Dashboard_Voiceover.wav
+¦   ¦   Bio_Quantum_AI_Intro_Voiceover.wav
+¦   ¦   Bio_Quantum_AI_Onboarding_Voiceover.wav
+¦   ¦   Bio_Quantum_AI_Platform_Complete_Demo.mp4
+¦   ¦   Bio_Quantum_AI_Platform_Full_Demo_With_Voiceover.mp4
+¦   ¦   Bio_Quantum_AI_SIMPLE_COMBINATION.mp4
+¦   ¦   Bio_Quantum_AI_YouTube_Video_Kit.tar
+¦   ¦   Bio_Quantum_AI_YouTube_Video_Kit.tar.gz
+¦   ¦   COMPREHENSIVE_DEMO_SCRIPT_PACKAGE.md
+¦   ¦   DEMO_EXECUTION_QUICK_REFERENCE.md
+¦   ¦   INTERACTIVE_DEMO_SCENARIOS.md
+¦   ¦   MANUS_CREDIT_REFUND_LOG.pdf
+¦   ¦   manus_credit_system_report.pdf
+¦   ¦   PHASE_2_DEMO_SCRIPT_PACKAGE_Combined.pdf
+¦   ¦   PHASE_6_&_7_IMPLEMENTATION_-_COMPLETE!_??.pdf
+¦   ¦   README.md
+¦   ¦   
+¦   +---Bio_Quantum_AI_YouTube_Video_Kit
+¦           BIO-QUANTUM_AI_TRADING_PLATFORM_-_VIDEO_PRODUCTION_GUIDE.pdf
+¦           BIO-QUANTUM_AI_TRADING_PLATFORM_-_VIDEO_SCRIPT.pdf
+¦           Bio_Quantum_AI_Dashboard_Voiceover.wav
+¦           Bio_Quantum_AI_Intro_Voiceover.wav
+¦           Bio_Quantum_AI_Onboarding_Voiceover.wav
+¦           Bio_Quantum_AI_Platform_Full_Demo_With_Voiceover.mp4
+¦           MANUS_CREDIT_REFUND_LOG.pdf
+¦           
++---AI_Trading_Platform_Backup_v1.0.tar
+¦       AI_Trading_Platform_Backup_v1.0.tar
+¦       
++---DIMIA_INTEGRATION_EXPORT_v1.0
+¦   +---data
+¦       ¦   Execution_Package_Contents.csv
+¦       ¦   PHASE_6_7_EXECUTION_PACKAGE_v1.0.tar.gz
+¦       ¦   PHASE_6_7_File_Contents.csv
+¦       ¦   
+¦       +---PHASE_6_7_EXECUTION_PACKAGE_v1.0
+¦       ¦   +---PHASE_6_7_EXECUTION_PACKAGE
+¦       ¦           Competitive_Advantage_Matrix.png
+¦       ¦           DIMIA_Integration_Flow_Architecture.png
+¦       ¦           Investment_ROI_Analysis_Dashboard.png
+¦       ¦           MANUS_TASK_COORDINATION_FRAMEWORK.md
+¦       ¦           MANUS_TASK_COORDINATION_PLAN.md
+¦       ¦           NOTION_AUTOMATION_FRAMEWORK.md
+¦       ¦           Phase_6_7_Execution_Timeline.png
+¦       ¦           PHASE_6_7_TRACKER_SUMMARY.md
+¦       ¦           README.md
+¦       ¦           
+¦       +---PHASE_6_7_EXECUTION_PACKAGE_v1.0_extracted
+¦           +---PHASE_6_7_EXECUTION_PACKAGE
+¦                   Competitive_Advantage_Matrix.png
+¦                   DIMIA_Integration_Flow_Architecture.png
+¦                   Investment_ROI_Analysis_Dashboard.png
+¦                   MANUS_TASK_COORDINATION_FRAMEWORK.md
+¦                   MANUS_TASK_COORDINATION_PLAN.md
+¦                   NOTION_AUTOMATION_FRAMEWORK.md
+¦                   Phase_6_7_Execution_Timeline.png
+¦                   PHASE_6_7_TRACKER_SUMMARY.md
+¦                   README.md
+¦                   
++---Recent Manus FUll Recovery
+        Bio-Quantum_AI_Platform_-_Project_Status_Summary.pdf
+        Bio-Quantum_AI_Trading_Platform_-_Complete_Project.pdf
+        credit_recovery_documentation.pdf
+        manus_credit_system_report.pdf
+        

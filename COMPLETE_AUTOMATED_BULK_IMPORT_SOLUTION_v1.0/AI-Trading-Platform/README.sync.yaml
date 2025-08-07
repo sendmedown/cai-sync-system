@@ -1,0 +1,645 @@
+# AI Trading Platform - Unified Sync Configuration
+# ================================================
+# 
+# This is the single source of truth configuration file for the complete
+# Manus-Notion-ChatGPT integration and synchronization framework.
+#
+# Author: Manus AI
+# Version: 1.0
+# Date: July 7, 2025
+# Last Updated: 2025-07-07T03:45:00Z
+
+# =============================================================================
+# PROJECT METADATA
+# =============================================================================
+project:
+  name: "AI Trading Platform"
+  version: "2.0"
+  description: "Revolutionary Bio-Quantum AI Trading Platform with DNA-Inspired Middleware Architecture"
+  repository: "https://github.com/your-org/ai-trading-platform"
+  documentation_url: "https://your-notion-workspace.notion.site/AI-Trading-Platform"
+  
+  # Project team configuration
+  team:
+    lead: "Richard (Project Lead)"
+    ai_developers: ["Manus AI", "ChatGPT Assistant"]
+    roles:
+      project_management: ["Richard"]
+      architecture: ["Richard", "Manus AI"]
+      implementation: ["Manus AI"]
+      documentation: ["Manus AI", "ChatGPT Assistant"]
+      testing: ["Manus AI"]
+      investor_relations: ["Richard", "Manus AI"]
+
+# =============================================================================
+# NOTION INTEGRATION CONFIGURATION
+# =============================================================================
+notion:
+  # Authentication
+  integration_token: "YOUR_NOTION_INTEGRATION_TOKEN_HERE"
+  workspace_id: "YOUR_NOTION_WORKSPACE_ID_HERE"
+  
+  # Page structure
+  parent_page_id: "YOUR_PARENT_PAGE_ID_HERE"
+  database_id: "YOUR_DATABASE_ID_HERE"
+  
+  # Content organization
+  page_structure:
+    root: "AI Trading Platform"
+    sections:
+      - name: "📋 Project Management"
+        children: ["Roadmap", "Sprint Planning", "Task Backlog"]
+      - name: "🏗️ Architecture"
+        children: ["HLDD", "DIMIA Framework", "Security Architecture"]
+      - name: "💼 Investor Materials"
+        children: ["Pitch Deck", "Financial Projections", "Demo Scripts"]
+      - name: "📚 Documentation"
+        children: ["Technical Specs", "User Guides", "API Documentation"]
+      - name: "🔒 Security"
+        children: ["Security Matrix", "Compliance Framework", "Audit Reports"]
+      - name: "🧪 Testing"
+        children: ["Test Plans", "QA Reports", "Performance Metrics"]
+  
+  # Sync behavior
+  sync_settings:
+    auto_create_pages: true
+    preserve_hierarchy: true
+    update_existing_pages: true
+    create_cross_references: true
+    enable_bidirectional_sync: true
+    conflict_resolution: "manual_review"
+
+# =============================================================================
+# MANUS API INTEGRATION CONFIGURATION
+# =============================================================================
+manus:
+  # API Configuration
+  api_endpoint: "https://api.manus.space"
+  api_key: "YOUR_MANUS_API_KEY_HERE"
+  websocket_endpoint: "wss://ws.manus.space"
+  
+  # Integration settings
+  integration:
+    enable_real_time_sync: true
+    enable_task_routing: true
+    enable_content_generation: true
+    enable_code_delivery: true
+    
+  # Content routing rules
+  content_routing:
+    documents: "auto_sync_to_notion"
+    code: "review_before_sync"
+    presentations: "auto_sync_to_notion"
+    reports: "auto_sync_to_notion"
+    
+  # Task assignment rules
+  task_assignment:
+    architecture: ["manus", "richard"]
+    security: ["manus"]
+    implementation: ["manus"]
+    documentation: ["manus", "chatgpt"]
+    testing: ["manus"]
+    project_management: ["richard"]
+
+# =============================================================================
+# DIRECTORY STRUCTURE AND SYNC MAPPING
+# =============================================================================
+directories:
+  # Source directories to monitor
+  sync_directories:
+    - path: "docs/"
+      description: "Documentation and specifications"
+      notion_target: "📚 Documentation"
+      auto_sync: true
+      
+    - path: "tasks/"
+      description: "Project management and task tracking"
+      notion_target: "📋 Project Management"
+      auto_sync: true
+      
+    - path: "assets/"
+      description: "Media files and diagrams"
+      notion_target: "🎨 Assets"
+      auto_sync: true
+      
+    - path: "presentations/"
+      description: "Investor decks and demo materials"
+      notion_target: "💼 Investor Materials"
+      auto_sync: true
+      
+    - path: "reports/"
+      description: "Analysis and status reports"
+      notion_target: "📊 Reports"
+      auto_sync: true
+      
+    - path: "sync/"
+      description: "Synchronization system files"
+      notion_target: "⚙️ System"
+      auto_sync: false
+      
+    - path: "backups/"
+      description: "Automated backup storage"
+      notion_target: null
+      auto_sync: false
+      
+    - path: "scripts/"
+      description: "Automation utilities"
+      notion_target: "⚙️ System"
+      auto_sync: false
+
+  # File type mappings
+  file_mappings:
+    markdown:
+      extensions: [".md", ".markdown"]
+      notion_format: "page"
+      auto_convert: true
+      
+    documents:
+      extensions: [".docx", ".pdf", ".txt"]
+      notion_format: "file_attachment"
+      auto_convert: false
+      
+    presentations:
+      extensions: [".pptx", ".html"]
+      notion_format: "file_attachment"
+      auto_convert: false
+      
+    code:
+      extensions: [".py", ".js", ".html", ".css", ".yaml", ".json"]
+      notion_format: "code_block"
+      auto_convert: true
+      
+    images:
+      extensions: [".png", ".jpg", ".jpeg", ".svg", ".gif"]
+      notion_format: "image_block"
+      auto_convert: true
+      
+    data:
+      extensions: [".csv", ".json", ".yaml"]
+      notion_format: "database_import"
+      auto_convert: true
+
+# =============================================================================
+# CONTENT PROCESSING RULES
+# =============================================================================
+content_processing:
+  # Markdown processing
+  markdown:
+    extract_headers: true
+    create_table_of_contents: true
+    process_code_blocks: true
+    extract_task_items: true
+    generate_summaries: true
+    
+  # Image processing
+  images:
+    auto_upload: true
+    resize_large_images: true
+    max_width: 1920
+    max_height: 1080
+    compress_quality: 85
+    
+  # Code processing
+  code:
+    syntax_highlighting: true
+    extract_comments: true
+    generate_documentation: true
+    
+  # Task extraction
+  task_extraction:
+    patterns:
+      - "TODO:"
+      - "FIXME:"
+      - "Action:"
+      - "Task:"
+      - "Implementation:"
+      - "Next steps:"
+      - "Requirements:"
+    auto_create_tasks: true
+    assign_to_backlog: true
+
+# =============================================================================
+# SYNC BEHAVIOR CONFIGURATION
+# =============================================================================
+sync:
+  # Timing settings
+  timing:
+    sync_interval_seconds: 30
+    batch_timeout_seconds: 5
+    debounce_delay_seconds: 1
+    max_retry_attempts: 3
+    retry_delay_seconds: 5
+    
+  # Performance settings
+  performance:
+    batch_size: 10
+    concurrent_uploads: 3
+    max_file_size_mb: 50
+    enable_compression: true
+    enable_caching: true
+    
+  # Monitoring settings
+  monitoring:
+    enable_metrics: true
+    log_level: "INFO"
+    health_check_interval_seconds: 300
+    track_sync_times: true
+    enable_notifications: true
+
+# =============================================================================
+# EXCLUSION PATTERNS
+# =============================================================================
+exclusions:
+  # File patterns to exclude from sync
+  patterns:
+    - "*.tmp"
+    - "*.log"
+    - "*.cache"
+    - ".git/"
+    - ".gitignore"
+    - "__pycache__/"
+    - "node_modules/"
+    - ".env"
+    - ".env.*"
+    - "*.pyc"
+    - "*.pyo"
+    - ".DS_Store"
+    - "Thumbs.db"
+    
+  # Directory patterns to exclude
+  directories:
+    - ".git"
+    - "__pycache__"
+    - "node_modules"
+    - ".vscode"
+    - ".idea"
+    - "venv"
+    - "env"
+    
+  # Size limits
+  limits:
+    max_file_size_mb: 50
+    max_directory_files: 1000
+
+# =============================================================================
+# SECURITY AND ACCESS CONTROL
+# =============================================================================
+security:
+  # Encryption settings
+  encryption:
+    encrypt_local_cache: true
+    verify_ssl_certificates: true
+    use_secure_protocols: true
+    
+  # Access control
+  access_control:
+    default_level: "internal"
+    content_rules:
+      "docs/public/": "public"
+      "docs/internal/": "internal"
+      "tasks/": "team"
+      "presentations/investor/": "restricted"
+      "reports/financial/": "restricted"
+      
+  # Audit settings
+  audit:
+    enable_audit_log: true
+    track_all_changes: true
+    log_access_attempts: true
+    retention_days: 365
+
+# =============================================================================
+# NOTIFICATION CONFIGURATION
+# =============================================================================
+notifications:
+  # Email notifications
+  email:
+    enabled: true
+    smtp_server: "smtp.gmail.com"
+    smtp_port: 587
+    username: "YOUR_EMAIL@gmail.com"
+    password: "YOUR_APP_PASSWORD"
+    
+  # Notification triggers
+  triggers:
+    sync_errors: true
+    large_file_uploads: true
+    access_violations: true
+    task_assignments: true
+    sprint_updates: true
+    
+  # Recipients
+  recipients:
+    admin: ["admin@yourcompany.com"]
+    team: ["team@yourcompany.com"]
+    alerts: ["alerts@yourcompany.com"]
+
+# =============================================================================
+# BACKUP AND RECOVERY
+# =============================================================================
+backup:
+  # Backup settings
+  settings:
+    enable_auto_backup: true
+    backup_interval_hours: 24
+    retention_days: 30
+    compress_backups: true
+    
+  # Backup locations
+  locations:
+    local: "backups/"
+    cloud: "s3://your-backup-bucket/"
+    
+  # Recovery settings
+  recovery:
+    enable_point_in_time_recovery: true
+    snapshot_interval_hours: 6
+    max_snapshots: 168  # 1 week of hourly snapshots
+
+# =============================================================================
+# DEVELOPMENT AND TESTING
+# =============================================================================
+development:
+  # Development mode settings
+  debug_mode: false
+  dry_run: false
+  verbose_logging: false
+  
+  # Testing configuration
+  testing:
+    enable_test_mode: false
+    test_data_directory: "test_data/"
+    mock_external_apis: false
+    
+  # Performance testing
+  performance:
+    enable_performance_tracking: true
+    benchmark_sync_operations: true
+    generate_performance_reports: true
+
+# =============================================================================
+# INTEGRATION WORKFLOWS
+# =============================================================================
+workflows:
+  # HLDD Integration Workflow
+  hldd_integration:
+    enabled: true
+    source_files:
+      - "docs/HLDD_DIMIA_INTEGRATION_PLAN.md"
+      - "docs/DNA_INSPIRED_MIDDLEWARE_ARCHITECTURE.md"
+    processing:
+      extract_sections: true
+      create_task_items: true
+      generate_roadmap: true
+      sync_to_notion: true
+      
+  # Investor Deck Workflow
+  investor_deck:
+    enabled: true
+    source_files:
+      - "presentations/investor-deck/"
+    processing:
+      convert_to_notion: true
+      generate_pdf: true
+      create_demo_links: true
+      
+  # Task Management Workflow
+  task_management:
+    enabled: true
+    auto_import_hldd_tasks: true
+    auto_assign_tasks: true
+    generate_sprint_plans: true
+    sync_to_project_boards: true
+    
+  # Code Delivery Workflow
+  code_delivery:
+    enabled: true
+    auto_sync_code: false  # Requires manual review
+    generate_documentation: true
+    run_tests: true
+    create_deployment_packages: true
+
+# =============================================================================
+# ADVANCED CONFIGURATION
+# =============================================================================
+advanced:
+  # API rate limiting
+  rate_limiting:
+    notion_requests_per_minute: 10
+    manus_requests_per_minute: 60
+    
+  # Caching configuration
+  caching:
+    enable_file_cache: true
+    cache_ttl_seconds: 3600
+    max_cache_size_mb: 100
+    
+  # Logging configuration
+  logging:
+    log_file: "sync.log"
+    max_log_size_mb: 10
+    log_rotation_count: 5
+    
+  # Metrics collection
+  metrics:
+    enable_metrics_collection: true
+    metrics_file: "sync_metrics.json"
+    collect_performance_data: true
+    
+  # Error handling
+  error_handling:
+    max_consecutive_errors: 5
+    error_cooldown_seconds: 60
+    enable_error_recovery: true
+
+# =============================================================================
+# SEMANTIC MAPPING CONFIGURATION
+# =============================================================================
+semantic_mapping:
+  # Content classification
+  classification:
+    architecture:
+      keywords: ["architecture", "system design", "technical architecture", "framework"]
+      notion_icon: "🏗️"
+      priority_boost: 15
+      
+    security:
+      keywords: ["security", "authentication", "encryption", "compliance"]
+      notion_icon: "🔒"
+      priority_boost: 20
+      
+    integration:
+      keywords: ["integration", "api", "interface", "middleware", "sync"]
+      notion_icon: "🔗"
+      priority_boost: 15
+      
+    implementation:
+      keywords: ["implementation", "development", "coding", "deployment"]
+      notion_icon: "⚙️"
+      priority_boost: 10
+      
+    testing:
+      keywords: ["testing", "validation", "qa", "verification"]
+      notion_icon: "🧪"
+      priority_boost: 10
+      
+    documentation:
+      keywords: ["documentation", "specification", "requirements", "guide"]
+      notion_icon: "📚"
+      priority_boost: 5
+      
+    project_management:
+      keywords: ["project", "timeline", "milestone", "roadmap", "backlog"]
+      notion_icon: "📋"
+      priority_boost: 15
+  
+  # Auto-tagging rules
+  auto_tagging:
+    enable_auto_tagging: true
+    tag_sources: ["filename", "content", "directory"]
+    confidence_threshold: 0.7
+
+# =============================================================================
+# COLLABORATION CONFIGURATION
+# =============================================================================
+collaboration:
+  # Team coordination
+  team_coordination:
+    enable_real_time_updates: true
+    enable_conflict_detection: true
+    enable_collaborative_editing: false  # Notion handles this
+    
+  # Communication channels
+  communication:
+    slack_webhook: "YOUR_SLACK_WEBHOOK_URL"
+    discord_webhook: "YOUR_DISCORD_WEBHOOK_URL"
+    teams_webhook: "YOUR_TEAMS_WEBHOOK_URL"
+    
+  # Review workflows
+  review_workflows:
+    require_review_for:
+      - "presentations/investor/"
+      - "docs/HLDD*"
+      - "reports/financial/"
+    reviewers:
+      default: ["richard"]
+      security: ["richard", "manus"]
+      financial: ["richard"]
+
+# =============================================================================
+# DEPLOYMENT CONFIGURATION
+# =============================================================================
+deployment:
+  # Environment settings
+  environment: "production"  # development, staging, production
+  
+  # Service configuration
+  service:
+    enable_service_mode: true
+    service_port: 8080
+    health_check_endpoint: "/health"
+    metrics_endpoint: "/metrics"
+    
+  # Scaling configuration
+  scaling:
+    enable_auto_scaling: false
+    min_instances: 1
+    max_instances: 3
+    cpu_threshold: 80
+    memory_threshold: 80
+
+# =============================================================================
+# MAINTENANCE AND MONITORING
+# =============================================================================
+maintenance:
+  # Scheduled maintenance
+  scheduled:
+    enable_scheduled_maintenance: true
+    maintenance_window: "02:00-04:00"  # UTC
+    maintenance_day: "sunday"
+    
+  # Health monitoring
+  health_monitoring:
+    enable_health_checks: true
+    check_interval_seconds: 60
+    alert_on_failures: true
+    
+  # Performance monitoring
+  performance_monitoring:
+    enable_performance_monitoring: true
+    track_response_times: true
+    track_error_rates: true
+    generate_reports: true
+
+# =============================================================================
+# VERSION CONTROL AND CHANGE TRACKING
+# =============================================================================
+version_control:
+  # Change tracking
+  change_tracking:
+    enable_change_tracking: true
+    track_file_versions: true
+    max_versions_per_file: 10
+    
+  # Git integration
+  git_integration:
+    enable_git_sync: false
+    repository_url: "https://github.com/your-org/ai-trading-platform"
+    branch: "main"
+    auto_commit: false
+    
+  # Rollback capabilities
+  rollback:
+    enable_rollback: true
+    max_rollback_days: 30
+    require_confirmation: true
+
+# =============================================================================
+# CUSTOM EXTENSIONS
+# =============================================================================
+extensions:
+  # Custom processors
+  custom_processors:
+    enabled: []
+    
+  # Plugin configuration
+  plugins:
+    enabled: []
+    
+  # Webhook integrations
+  webhooks:
+    enabled: []
+
+# =============================================================================
+# CONFIGURATION VALIDATION
+# =============================================================================
+validation:
+  # Required fields validation
+  required_fields:
+    - "notion.integration_token"
+    - "project.name"
+    - "directories.sync_directories"
+    
+  # Configuration schema version
+  schema_version: "1.0"
+  
+  # Last validation
+  last_validated: "2025-07-07T03:45:00Z"
+  validation_status: "valid"
+
+# =============================================================================
+# END OF CONFIGURATION
+# =============================================================================
+
+# This configuration file serves as the single source of truth for the entire
+# Manus-Notion-ChatGPT integration framework. All components reference this
+# file for their operational parameters.
+#
+# To use this configuration:
+# 1. Replace all "YOUR_*_HERE" placeholders with actual values
+# 2. Adjust paths and settings to match your environment
+# 3. Test the configuration with the validation tools
+# 4. Deploy and monitor the sync system
+#
+# For support and updates, refer to the deployment guide and technical documentation.
+

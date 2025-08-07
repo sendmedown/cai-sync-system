@@ -1,0 +1,17 @@
+assets
+backlog_config.yaml
+backups
+docs
+filelist.txt
+hldd_mapping_config.yaml
+manus_api_client.py
+notion_sync.py
+presentations
+README.md
+README.sync.yaml
+reports
+scripts
+sync
+sync_config.yaml
+tasks
+__pycache__

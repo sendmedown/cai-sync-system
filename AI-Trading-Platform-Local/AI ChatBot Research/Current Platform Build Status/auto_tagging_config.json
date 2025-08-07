@@ -1,0 +1,41 @@
+{
+  "enabled": true,
+  "rules": {
+    "major_release": {
+      "pattern": "v*.0.0",
+      "triggers": [
+        "platform_enhancement",
+        "new_features",
+        "architecture_change"
+      ],
+      "auto_generate_notes": true
+    },
+    "minor_release": {
+      "pattern": "v*.*.0",
+      "triggers": [
+        "feature_addition",
+        "ui_improvement",
+        "performance_boost"
+      ],
+      "auto_generate_notes": true
+    },
+    "patch_release": {
+      "pattern": "v*.*.*",
+      "triggers": [
+        "bug_fix",
+        "security_update",
+        "documentation_update"
+      ],
+      "auto_generate_notes": false
+    }
+  },
+  "milestone_tags": {
+    "YouTube-Ready": "v1.0.0",
+    "Enhanced-Platform": "v1.1.0",
+    "Production-Deploy": "v2.0.0",
+    "Investor-Demo": "v2.1.0",
+    "Market-Launch": "v3.0.0"
+  },
+  "auto_backup": true,
+  "notification_enabled": true
+}

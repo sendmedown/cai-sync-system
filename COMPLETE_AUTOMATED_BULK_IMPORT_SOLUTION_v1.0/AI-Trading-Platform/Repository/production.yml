@@ -1,0 +1,401 @@
+---
+# Bio-Quantum AI Trading Platform - Production Configuration
+# Version: 1.0.0
+# Environment: Production
+
+# Application Settings
+application:
+  name: "Bio-Quantum AI Trading Platform"
+  version: "1.0.0"
+  environment: "production"
+  debug: false
+  log_level: "INFO"
+  timezone: "UTC"
+
+# Database Configuration
+database:
+  primary:
+    engine: "postgresql"
+    host: "localhost"
+    port: 5432
+    name: "bio_quantum_prod"
+    username: "bio-quantum"
+    password: "${DB_PASSWORD}"
+    ssl_mode: "require"
+    pool_size: 20
+    max_overflow: 30
+    pool_timeout: 30
+    pool_recycle: 3600
+    
+  redis:
+    host: "localhost"
+    port: 6380
+    password: "${REDIS_PASSWORD}"
+    db: 0
+    max_connections: 50
+    socket_timeout: 30
+    socket_connect_timeout: 30
+    retry_on_timeout: true
+
+# Trading API Configuration
+trading_api:
+  default_exchange: "binance"
+  
+  exchanges:
+    binance:
+      name: "Binance"
+      api_url: "https://api.binance.com"
+      testnet_url: "https://testnet.binance.vision"
+      websocket_url: "wss://stream.binance.com:9443"
+      testnet_websocket_url: "wss://testnet.binance.vision"
+      api_key: "${BINANCE_API_KEY}"
+      api_secret: "${BINANCE_API_SECRET}"
+      testnet: false
+      rate_limits:
+        requests_per_minute: 1200
+        orders_per_second: 10
+        orders_per_day: 200000
+      
+    coinbase:
+      name: "Coinbase Pro"
+      api_url: "https://api.pro.coinbase.com"
+      sandbox_url: "https://api-public.sandbox.pro.coinbase.com"
+      api_key: "${COINBASE_API_KEY}"
+      api_secret: "${COINBASE_API_SECRET}"
+      passphrase: "${COINBASE_PASSPHRASE}"
+      sandbox: false
+      rate_limits:
+        requests_per_second: 10
+        
+  security:
+    api_key_rotation_days: 90
+    max_api_failures: 5
+    api_timeout_seconds: 30
+    retry_attempts: 3
+    retry_delay_seconds: 1
+
+# Execution Engine Configuration
+execution_engine:
+  mode: "live"  # simulation, paper, live
+  
+  risk_management:
+    max_position_size_percent: 10.0
+    max_daily_loss_percent: 5.0
+    max_drawdown_percent: 15.0
+    emergency_stop_loss_percent: 10.0
+    position_size_algorithm: "kelly_criterion"
+    
+  order_management:
+    default_order_type: "limit"
+    slippage_tolerance_percent: 0.5
+    execution_timeout_seconds: 30
+    partial_fill_threshold_percent: 90.0
+    
+  performance_targets:
+    max_execution_time_ms: 100
+    success_rate_target_percent: 95.0
+    uptime_target_percent: 99.9
+
+# Knowledge Nugget Loop Configuration
+knowledge_loop:
+  enabled: true
+  
+  learning_cycle:
+    observation_window_hours: 1
+    analysis_depth: "deep"
+    adaptation_threshold: 0.7
+    validation_period_hours: 24
+    deployment_confidence_threshold: 0.8
+    
+  pattern_detection:
+    market_patterns: true
+    execution_patterns: true
+    risk_patterns: true
+    anomaly_detection: true
+    
+  knowledge_base:
+    max_nuggets: 1000
+    retention_days: 365
+    backup_frequency_hours: 6
+    
+  machine_learning:
+    model_type: "ensemble"
+    training_frequency_hours: 6
+    feature_engineering: true
+    cross_validation_folds: 5
+
+# Live Strategy Execution Configuration
+live_execution:
+  enabled: true
+  
+  strategy_management:
+    max_concurrent_strategies: 10
+    auto_restart_failed_strategies: true
+    max_strategy_failures: 3
+    strategy_timeout_minutes: 60
+    
+  monitoring:
+    health_check_interval_seconds: 30
+    performance_update_interval_seconds: 5
+    alert_check_interval_seconds: 10
+    
+  emergency_controls:
+    emergency_stop_enabled: true
+    portfolio_loss_threshold_percent: 10.0
+    system_health_threshold: "warning"
+    auto_pause_on_errors: true
+
+# Security Configuration
+security:
+  encryption:
+    algorithm: "AES-256-GCM"
+    key_derivation: "PBKDF2"
+    iterations: 100000
+    salt_length: 32
+    
+  authentication:
+    jwt_secret: "${JWT_SECRET}"
+    token_expiry_seconds: 3600
+    refresh_token_expiry_seconds: 86400
+    max_login_attempts: 5
+    lockout_duration_minutes: 30
+    
+  api_security:
+    rate_limiting:
+      enabled: true
+      requests_per_minute: 60
+      burst_size: 10
+      
+    cors:
+      enabled: true
+      allowed_origins:
+        - "https://bio-quantum.ai"
+        - "https://app.bio-quantum.ai"
+      allowed_methods:
+        - "GET"
+        - "POST"
+        - "PUT"
+        - "DELETE"
+      allowed_headers:
+        - "Content-Type"
+        - "Authorization"
+        - "X-Requested-With"
+        
+  ssl_tls:
+    enabled: true
+    cert_file: "/opt/bio-quantum-ai/ssl/bio-quantum.crt"
+    key_file: "/opt/bio-quantum-ai/ssl/bio-quantum.key"
+    protocols:
+      - "TLSv1.2"
+      - "TLSv1.3"
+    ciphers: "ECDHE+AESGCM:ECDHE+CHACHA20:DHE+AESGCM:DHE+CHACHA20:!aNULL:!MD5:!DSS"
+
+# Monitoring and Alerting Configuration
+monitoring:
+  enabled: true
+  
+  metrics:
+    collection_interval_seconds: 10
+    retention_days: 30
+    export_port: 9090
+    
+  health_checks:
+    enabled: true
+    interval_seconds: 30
+    timeout_seconds: 10
+    endpoints:
+      - "/health"
+      - "/health/database"
+      - "/health/redis"
+      - "/health/exchanges"
+      
+  alerting:
+    enabled: true
+    
+    thresholds:
+      cpu_usage_percent: 80
+      memory_usage_percent: 85
+      disk_usage_percent: 90
+      response_time_ms: 1000
+      error_rate_percent: 5
+      
+    channels:
+      email:
+        enabled: true
+        smtp_server: "smtp.gmail.com"
+        smtp_port: 587
+        username: "${SMTP_USERNAME}"
+        password: "${SMTP_PASSWORD}"
+        from_address: "alerts@bio-quantum.ai"
+        recipients:
+          - "admin@bio-quantum.ai"
+          - "ops@bio-quantum.ai"
+          
+      slack:
+        enabled: true
+        webhook_url: "${SLACK_WEBHOOK_URL}"
+        channel: "#bio-quantum-alerts"
+        username: "Bio-Quantum Bot"
+        
+      sms:
+        enabled: false
+        provider: "twilio"
+        account_sid: "${TWILIO_ACCOUNT_SID}"
+        auth_token: "${TWILIO_AUTH_TOKEN}"
+        from_number: "${TWILIO_FROM_NUMBER}"
+        recipients:
+          - "+1234567890"
+
+# Logging Configuration
+logging:
+  level: "INFO"
+  format: "json"
+  
+  handlers:
+    console:
+      enabled: true
+      level: "INFO"
+      
+    file:
+      enabled: true
+      level: "INFO"
+      file_path: "/var/log/bio-quantum-ai/application.log"
+      max_size_mb: 100
+      backup_count: 10
+      
+    syslog:
+      enabled: true
+      level: "WARNING"
+      facility: "local0"
+      
+  loggers:
+    trading_api:
+      level: "INFO"
+      sensitive_data_masking: true
+      
+    execution_engine:
+      level: "INFO"
+      performance_logging: true
+      
+    knowledge_loop:
+      level: "INFO"
+      learning_events: true
+      
+    security:
+      level: "WARNING"
+      audit_trail: true
+
+# Backup and Recovery Configuration
+backup:
+  enabled: true
+  
+  database:
+    frequency: "daily"
+    time: "02:00"
+    retention_days: 30
+    compression: true
+    encryption: true
+    
+  application_data:
+    frequency: "hourly"
+    retention_hours: 168  # 7 days
+    include_logs: false
+    
+  knowledge_base:
+    frequency: "every_6_hours"
+    retention_days: 90
+    
+  configuration:
+    frequency: "daily"
+    retention_days: 365
+    
+  storage:
+    local_path: "/opt/bio-quantum-ai/backups"
+    cloud_provider: "aws_s3"
+    cloud_bucket: "bio-quantum-backups"
+    cloud_region: "us-east-1"
+
+# Performance Optimization
+performance:
+  async_workers: 4
+  thread_pool_size: 20
+  connection_pool_size: 50
+  
+  caching:
+    enabled: true
+    backend: "redis"
+    default_timeout_seconds: 300
+    
+  compression:
+    enabled: true
+    algorithm: "gzip"
+    level: 6
+    
+  database_optimization:
+    query_timeout_seconds: 30
+    slow_query_threshold_ms: 1000
+    connection_recycling: true
+
+# Development and Testing
+development:
+  debug_mode: false
+  profiling_enabled: false
+  test_mode: false
+  
+  testing:
+    paper_trading_enabled: true
+    simulation_mode_enabled: true
+    backtesting_enabled: true
+    
+# Feature Flags
+features:
+  advanced_analytics: true
+  machine_learning: true
+  multi_exchange_arbitrage: true
+  social_trading: false
+  copy_trading: false
+  algorithmic_trading: true
+  manual_trading: true
+  
+# Compliance and Regulatory
+compliance:
+  enabled: true
+  
+  reporting:
+    trade_reporting: true
+    performance_reporting: true
+    risk_reporting: true
+    audit_trail: true
+    
+  data_retention:
+    trade_data_years: 7
+    user_data_years: 5
+    log_data_years: 2
+    
+  privacy:
+    gdpr_compliance: true
+    data_anonymization: true
+    right_to_deletion: true
+
+# Environment Variables (to be set in deployment)
+environment_variables:
+  required:
+    - "DB_PASSWORD"
+    - "REDIS_PASSWORD"
+    - "BINANCE_API_KEY"
+    - "BINANCE_API_SECRET"
+    - "JWT_SECRET"
+    - "SMTP_USERNAME"
+    - "SMTP_PASSWORD"
+    - "SLACK_WEBHOOK_URL"
+    
+  optional:
+    - "COINBASE_API_KEY"
+    - "COINBASE_API_SECRET"
+    - "COINBASE_PASSPHRASE"
+    - "TWILIO_ACCOUNT_SID"
+    - "TWILIO_AUTH_TOKEN"
+    - "TWILIO_FROM_NUMBER"
+    - "AWS_ACCESS_KEY_ID"
+    - "AWS_SECRET_ACCESS_KEY"
+

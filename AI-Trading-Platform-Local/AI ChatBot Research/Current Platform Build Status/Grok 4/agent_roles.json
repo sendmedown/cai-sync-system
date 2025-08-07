@@ -1,0 +1,27 @@
+```json
+{
+  "agents": {
+    "Claude_3": {
+      "permissions": ["read_docs", "write_docs"],
+      "scope": "documentation",
+      "tasks": ["document_review", "generate_investor_pdf", "audit_hldd"]
+    },
+    "Grok_ANO": {
+      "permissions": ["read_code", "write_code", "simulate"],
+      "scope": "dev",
+      "tasks": ["animate_ui", "simulate_AAPL_AI_trade_recommendation", "display_agent_status"]
+    },
+    "GPT_4o": {
+      "permissions": ["read_all", "write_code", "integrate"],
+      "scope": "integration",
+      "tasks": ["integrate_polygon_api", "validate_middleware", "test_rate_limits"]
+    },
+    "Manus": {
+      "permissions": ["read_ui", "write_video"],
+      "scope": "visuals",
+      "tasks": ["create_demo_video"],
+      "status": "simulated"
+    }
+  }
+}
+```

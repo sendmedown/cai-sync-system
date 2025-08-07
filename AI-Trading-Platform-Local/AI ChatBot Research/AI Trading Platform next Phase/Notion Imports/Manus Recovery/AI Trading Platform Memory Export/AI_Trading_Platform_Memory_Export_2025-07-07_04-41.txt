@@ -1,0 +1,78 @@
+
+# AI Trading Platform – Persistent Memory Export
+
+## Overview
+Richard is designing and developing a cloud-hosted, modular AI Trading Platform. The platform is divided into multiple development phases and includes features for trading strategy creation, real-time market integration, AI modeling, blockchain security, and investor onboarding.
+
+---
+
+## Core Components & Features
+
+### Phase Structure:
+- **Phase 1**: Authentication, basic dashboard
+- **Phase 2**: Backend infrastructure, CI/CD, and testing suite
+- **Phase 3**: Investor materials creation and onboarding flows
+- **Phase 4**: AI Strategy Builder and supervised learning models
+- **Phase 5A**: Reinforcement Learning agent integration and backtesting
+- **Phase 6**: Financial reporting, megatrends, AI insights
+- **Phase 7**: Full testing, feedback loop, and production deployment
+
+---
+
+## Technology Stack
+- **Frontend**: React with Tailwind, real-time dashboards
+- **Backend**: Flask-based REST APIs with modular architecture
+- **CI/CD**: GitHub Actions, containerized with Docker
+- **AI Models**: LSTM/GRU, Supervised + Reinforcement Learning
+- **Middleware Integration**: TradingView → MetaTrader → ThinkOrSwim → Interactive Brokers (via abstraction layer)
+- **Security**: Blockchain photonic gateway + AI-powered NIDR agent
+- **Wallets**: Crypto wallet support, cold storage integration
+- **Payment System**: Stripe + tiered access control
+
+---
+
+## UX & Features
+- **AI Strategy Onboarding Assistant** (context-aware, role-based, 5-step wizard)
+- **ChatBot Assistant** (market education, trading support, guided learning)
+- **Profit Allocation Engine** (shared yield pools and staking)
+- **Quantum Roadmap**: Future photonic CPU integration and gateway upgrades
+- **Investor Demo Site**: Static demo with tier-based UI, contextual banners
+
+---
+
+## Strategic Goals
+- **Differentiators**: Modular AI middleware, 24/7 AI support for traders, blockchain auditing
+- **Monetization**: AI subscription tiers, sponsor banners, staking/mining expansion
+- **Investor Prep**: Executive deck, Notion-based collaboration, demo walkthrough
+- **Patent Scope**: Up to 7 IP filings across gateway, onboarding wizard, AI model customization, and security architecture
+
+---
+
+## Team & Coordination
+- **Richard**: Lead architect, CTO-level oversight
+- **Manus**: Frontend dev + middleware integrator (TradingView, MetaTrader)
+- **Notion Workspace**: Tasks, investor docs, and HLDD updates
+- **Render Deployment**: Static & full deployments for testing + demo
+
+---
+
+## Status Snapshot (As of July 2025)
+- Backend: ✅ 100% Complete
+- Frontend: 🚧 ~50% Complete (AI Onboarding UI in progress)
+- Middleware: ✅ TradingView, MetaTrader ready | 🕓 ThinkOrSwim in progress
+- Security Stack: ✅ Gateway diagrams and test logs complete
+- Investor Deck: 🕓 Updated version in revision
+- Patents: 🕓 IP identification and cost estimates in progress
+
+---
+
+## Pending Deliverables
+- [ ] Finalize AI Onboarding UI (5 steps)
+- [ ] Complete profit allocation engine
+- [ ] Build tiered static demo site (Basic, Pro, Enterprise)
+- [ ] Confirm CI/CD deployment pipeline for all modules
+- [ ] Finalize Notion workspace population
+
+---
+
+# End of Export

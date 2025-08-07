@@ -1,0 +1,629 @@
+{
+  "timestamp": "2025-07-10T05:47:11.400478",
+  "api_testing_results": {
+    "yahoo_finance": {
+      "success": true,
+      "meta": {
+        "currency": "USD",
+        "symbol": "IBM",
+        "exchangeName": "NYQ",
+        "fullExchangeName": "NYSE",
+        "instrumentType": "EQUITY",
+        "firstTradeDate": -252322200,
+        "regularMarketTime": 1752091202,
+        "hasPrePostMarketData": true,
+        "gmtoffset": -14400,
+        "timezone": "EDT",
+        "exchangeTimezoneName": "America/New_York",
+        "regularMarketPrice": 290.14,
+        "fiftyTwoWeekHigh": 296.16,
+        "fiftyTwoWeekLow": 176.62,
+        "regularMarketDayHigh": 291.5,
+        "regularMarketDayLow": 288.63,
+        "regularMarketVolume": 2231654,
+        "longName": "International Business Machines Corporation",
+        "shortName": "International Business Machines",
+        "chartPreviousClose": 272.08,
+        "priceHint": 2,
+        "currentTradingPeriod": {
+          "pre": {
+            "timezone": "EDT",
+            "start": 1752134400,
+            "end": 1752154200,
+            "gmtoffset": -14400
+          },
+          "regular": {
+            "timezone": "EDT",
+            "start": 1752154200,
+            "end": 1752177600,
+            "gmtoffset": -14400
+          },
+          "post": {
+            "timezone": "EDT",
+            "start": 1752177600,
+            "end": 1752192000,
+            "gmtoffset": -14400
+          }
+        },
+        "dataGranularity": "1d",
+        "range": "1mo",
+        "validRanges": [
+          "1d",
+          "5d",
+          "1mo",
+          "3mo",
+          "6mo",
+          "1y",
+          "2y",
+          "5y",
+          "10y",
+          "ytd",
+          "max"
+        ]
+      },
+      "candlestick_data": [
+        {
+          "timestamp": 1749562200,
+          "date": "2025-06-10",
+          "open": 273.19,
+          "high": 277.47,
+          "low": 272.56,
+          "close": 276.24,
+          "volume": 5163500
+        },
+        {
+          "timestamp": 1749648600,
+          "date": "2025-06-11",
+          "open": 276.7,
+          "high": 281.75,
+          "low": 275.11,
+          "close": 281.52,
+          "volume": 4656000
+        },
+        {
+          "timestamp": 1749735000,
+          "date": "2025-06-12",
+          "open": 281.53,
+          "high": 283.06,
+          "low": 279.83,
+          "close": 281.03,
+          "volume": 3418000
+        },
+        {
+          "timestamp": 1749821400,
+          "date": "2025-06-13",
+          "open": 278.21,
+          "high": 279.84,
+          "low": 275.83,
+          "close": 277.22,
+          "volume": 3243800
+        },
+        {
+          "timestamp": 1750080600,
+          "date": "2025-06-16",
+          "open": 279.31,
+          "high": 284.5,
+          "low": 278.67,
+          "close": 281.83,
+          "volume": 3685300
+        },
+        {
+          "timestamp": 1750167000,
+          "date": "2025-06-17",
+          "open": 281.15,
+          "high": 284.79,
+          "low": 281.0,
+          "close": 283.05,
+          "volume": 3069600
+        },
+        {
+          "timestamp": 1750253400,
+          "date": "2025-06-18",
+          "open": 285.0,
+          "high": 286.91,
+          "low": 282.94,
+          "close": 283.21,
+          "volume": 3534100
+        },
+        {
+          "timestamp": 1750426200,
+          "date": "2025-06-20",
+          "open": 279.28,
+          "high": 284.12,
+          "low": 277.2,
+          "close": 280.97,
+          "volume": 7677000
+        },
+        {
+          "timestamp": 1750685400,
+          "date": "2025-06-23",
+          "open": 281.65,
+          "high": 289.58,
+          "low": 280.21,
+          "close": 289.18,
+          "volume": 3786200
+        },
+        {
+          "timestamp": 1750771800,
+          "date": "2025-06-24",
+          "open": 290.46,
+          "high": 294.34,
+          "low": 288.41,
+          "close": 293.79,
+          "volume": 4219100
+        },
+        {
+          "timestamp": 1750858200,
+          "date": "2025-06-25",
+          "open": 294.49,
+          "high": 296.16,
+          "low": 289.5,
+          "close": 291.06,
+          "volume": 3862300
+        },
+        {
+          "timestamp": 1750944600,
+          "date": "2025-06-26",
+          "open": 291.8,
+          "high": 292.91,
+          "low": 290.17,
+          "close": 291.93,
+          "volume": 3621100
+        },
+        {
+          "timestamp": 1751031000,
+          "date": "2025-06-27",
+          "open": 292.97,
+          "high": 293.12,
+          "low": 288.52,
+          "close": 289.7,
+          "volume": 3562500
+        },
+        {
+          "timestamp": 1751290200,
+          "date": "2025-06-30",
+          "open": 290.93,
+          "high": 294.81,
+          "low": 290.0,
+          "close": 294.78,
+          "volume": 3495400
+        },
+        {
+          "timestamp": 1751376600,
+          "date": "2025-07-01",
+          "open": 294.55,
+          "high": 295.11,
+          "low": 290.08,
+          "close": 291.2,
+          "volume": 3272800
+        },
+        {
+          "timestamp": 1751463000,
+          "date": "2025-07-02",
+          "open": 290.0,
+          "high": 290.19,
+          "low": 286.9,
+          "close": 287.65,
+          "volume": 3257500
+        },
+        {
+          "timestamp": 1751549400,
+          "date": "2025-07-03",
+          "open": 287.94,
+          "high": 292.32,
+          "low": 287.9,
+          "close": 291.97,
+          "volume": 1853300
+        },
+        {
+          "timestamp": 1751895000,
+          "date": "2025-07-07",
+          "open": 292.5,
+          "high": 295.22,
+          "low": 290.36,
+          "close": 292.47,
+          "volume": 4488100
+        },
+        {
+          "timestamp": 1751981400,
+          "date": "2025-07-08",
+          "open": 293.1,
+          "high": 295.61,
+          "low": 289.49,
+          "close": 290.42,
+          "volume": 2925300
+        },
+        {
+          "timestamp": 1752067800,
+          "date": "2025-07-09",
+          "open": 291.39,
+          "high": 291.6,
+          "low": 288.63,
+          "close": 290.14,
+          "volume": 2970200
+        }
+      ],
+      "raw_data": {
+        "chart": {
+          "result": [
+            {
+              "meta": {
+                "currency": "USD",
+                "symbol": "IBM",
+                "exchangeName": "NYQ",
+                "fullExchangeName": "NYSE",
+                "instrumentType": "EQUITY",
+                "firstTradeDate": -252322200,
+                "regularMarketTime": 1752091202,
+                "hasPrePostMarketData": true,
+                "gmtoffset": -14400,
+                "timezone": "EDT",
+                "exchangeTimezoneName": "America/New_York",
+                "regularMarketPrice": 290.14,
+                "fiftyTwoWeekHigh": 296.16,
+                "fiftyTwoWeekLow": 176.62,
+                "regularMarketDayHigh": 291.5,
+                "regularMarketDayLow": 288.63,
+                "regularMarketVolume": 2231654,
+                "longName": "International Business Machines Corporation",
+                "shortName": "International Business Machines",
+                "chartPreviousClose": 272.08,
+                "priceHint": 2,
+                "currentTradingPeriod": {
+                  "pre": {
+                    "timezone": "EDT",
+                    "start": 1752134400,
+                    "end": 1752154200,
+                    "gmtoffset": -14400
+                  },
+                  "regular": {
+                    "timezone": "EDT",
+                    "start": 1752154200,
+                    "end": 1752177600,
+                    "gmtoffset": -14400
+                  },
+                  "post": {
+                    "timezone": "EDT",
+                    "start": 1752177600,
+                    "end": 1752192000,
+                    "gmtoffset": -14400
+                  }
+                },
+                "dataGranularity": "1d",
+                "range": "1mo",
+                "validRanges": [
+                  "1d",
+                  "5d",
+                  "1mo",
+                  "3mo",
+                  "6mo",
+                  "1y",
+                  "2y",
+                  "5y",
+                  "10y",
+                  "ytd",
+                  "max"
+                ]
+              },
+              "timestamp": [
+                1749562200,
+                1749648600,
+                1749735000,
+                1749821400,
+                1750080600,
+                1750167000,
+                1750253400,
+                1750426200,
+                1750685400,
+                1750771800,
+                1750858200,
+                1750944600,
+                1751031000,
+                1751290200,
+                1751376600,
+                1751463000,
+                1751549400,
+                1751895000,
+                1751981400,
+                1752067800
+              ],
+              "indicators": {
+                "quote": [
+                  {
+                    "open": [
+                      273.19000244140625,
+                      276.70001220703125,
+                      281.5299987792969,
+                      278.2099914550781,
+                      279.30999755859375,
+                      281.1499938964844,
+                      285.0,
+                      279.2799987792969,
+                      281.6499938964844,
+                      290.4599914550781,
+                      294.489990234375,
+                      291.79998779296875,
+                      292.9700012207031,
+                      290.92999267578125,
+                      294.54998779296875,
+                      290.0,
+                      287.94000244140625,
+                      292.5,
+                      293.1000061035156,
+                      291.3900146484375
+                    ],
+                    "low": [
+                      272.55999755859375,
+                      275.1099853515625,
+                      279.8299865722656,
+                      275.8299865722656,
+                      278.6700134277344,
+                      281.0,
+                      282.94000244140625,
+                      277.20001220703125,
+                      280.2099914550781,
+                      288.4100036621094,
+                      289.5,
+                      290.1700134277344,
+                      288.5199890136719,
+                      290.0,
+                      290.0799865722656,
+                      286.8999938964844,
+                      287.8999938964844,
+                      290.3599853515625,
+                      289.489990234375,
+                      288.6300048828125
+                    ],
+                    "close": [
+                      276.239990234375,
+                      281.5199890136719,
+                      281.0299987792969,
+                      277.2200012207031,
+                      281.8299865722656,
+                      283.04998779296875,
+                      283.2099914550781,
+                      280.9700012207031,
+                      289.17999267578125,
+                      293.7900085449219,
+                      291.05999755859375,
+                      291.92999267578125,
+                      289.70001220703125,
+                      294.7799987792969,
+                      291.20001220703125,
+                      287.6499938964844,
+                      291.9700012207031,
+                      292.4700012207031,
+                      290.4200134277344,
+                      290.1400146484375
+                    ],
+                    "volume": [
+                      5163500,
+                      4656000,
+                      3418000,
+                      3243800,
+                      3685300,
+                      3069600,
+                      3534100,
+                      7677000,
+                      3786200,
+                      4219100,
+                      3862300,
+                      3621100,
+                      3562500,
+                      3495400,
+                      3272800,
+                      3257500,
+                      1853300,
+                      4488100,
+                      2925300,
+                      2970200
+                    ],
+                    "high": [
+                      277.4700012207031,
+                      281.75,
+                      283.05999755859375,
+                      279.8399963378906,
+                      284.5,
+                      284.7900085449219,
+                      286.9100036621094,
+                      284.1199951171875,
+                      289.5799865722656,
+                      294.3399963378906,
+                      296.1600036621094,
+                      292.9100036621094,
+                      293.1199951171875,
+                      294.80999755859375,
+                      295.1099853515625,
+                      290.19000244140625,
+                      292.32000732421875,
+                      295.2200012207031,
+                      295.6099853515625,
+                      291.6000061035156
+                    ]
+                  }
+                ],
+                "adjclose": [
+                  {
+                    "adjclose": [
+                      276.239990234375,
+                      281.5199890136719,
+                      281.0299987792969,
+                      277.2200012207031,
+                      281.8299865722656,
+                      283.04998779296875,
+                      283.2099914550781,
+                      280.9700012207031,
+                      289.17999267578125,
+                      293.7900085449219,
+                      291.05999755859375,
+                      291.92999267578125,
+                      289.70001220703125,
+                      294.7799987792969,
+                      291.20001220703125,
+                      287.6499938964844,
+                      291.9700012207031,
+                      292.4700012207031,
+                      290.4200134277344,
+                      290.1400146484375
+                    ]
+                  }
+                ]
+              }
+            }
+          ],
+          "error": null
+        }
+      }
+    },
+    "status": "Working"
+  },
+  "user_account_fields": {
+    "personal_information": {
+      "required_fields": [
+        "first_name",
+        "last_name",
+        "date_of_birth",
+        "ssn_tax_id",
+        "nationality",
+        "country_of_residence",
+        "email",
+        "phone"
+      ],
+      "optional_fields": [
+        "middle_name",
+        "preferred_name",
+        "linkedin_profile",
+        "twitter_handle"
+      ]
+    },
+    "address_information": {
+      "required_fields": [
+        "street_address",
+        "city",
+        "state_province",
+        "postal_code",
+        "country"
+      ],
+      "optional_fields": [
+        "apartment_unit",
+        "address_line_2"
+      ]
+    },
+    "employment_information": {
+      "required_fields": [
+        "employment_status",
+        "employer_name",
+        "job_title",
+        "annual_income_range",
+        "source_of_funds",
+        "net_worth"
+      ],
+      "optional_fields": [
+        "industry",
+        "years_employed",
+        "employer_address"
+      ]
+    },
+    "trading_experience": {
+      "required_fields": [
+        "experience_level",
+        "risk_tolerance",
+        "investment_timeline",
+        "investment_objectives",
+        "trading_frequency"
+      ],
+      "optional_fields": [
+        "previous_brokers",
+        "investment_amount",
+        "trading_strategies"
+      ]
+    },
+    "financial_information": {
+      "required_fields": [
+        "bank_name",
+        "account_type",
+        "account_holder_name",
+        "routing_number",
+        "account_number_last_4"
+      ],
+      "optional_fields": [
+        "swift_code",
+        "iban",
+        "wire_transfer_limits",
+        "credit_cards"
+      ]
+    },
+    "verification_status": {
+      "required_fields": [
+        "identity_verification",
+        "address_verification",
+        "phone_verification",
+        "bank_verification"
+      ],
+      "optional_fields": [
+        "document_uploads",
+        "selfie_verification",
+        "video_call_verification"
+      ]
+    },
+    "account_settings": {
+      "required_fields": [
+        "account_type",
+        "margin_enabled",
+        "options_level",
+        "day_trading_enabled",
+        "crypto_enabled"
+      ],
+      "optional_fields": [
+        "api_access",
+        "mobile_notifications",
+        "email_preferences"
+      ]
+    },
+    "compliance_kyc": {
+      "required_fields": [
+        "politically_exposed_person",
+        "fatca_status",
+        "crs_status",
+        "beneficial_ownership",
+        "source_of_wealth"
+      ],
+      "optional_fields": [
+        "tax_residency",
+        "w9_form",
+        "accredited_investor_status"
+      ]
+    }
+  },
+  "charting_integration": {
+    "tradingview": {
+      "status": "Ready for Integration",
+      "features": [
+        "Professional candlestick charts",
+        "Technical indicators (RSI, MACD, Moving Averages)",
+        "Custom datafeed integration",
+        "Real-time data support",
+        "Symbol search integration",
+        "Dark theme support",
+        "Mobile responsive"
+      ]
+    }
+  },
+  "recommended_apis": {
+    "primary_data_source": "Yahoo Finance (Free, Working)",
+    "charting_library": "TradingView Charting Library (Free)",
+    "backup_data_sources": [
+      "Alpha Vantage (Free tier: 5 calls/min)",
+      "Polygon.io (Free tier: 5 calls/min)",
+      "IEX Cloud (Deprecated, but alternatives available)"
+    ]
+  },
+  "implementation_priority": [
+    "1. Integrate Yahoo Finance API for real market data",
+    "2. Implement TradingView charting library",
+    "3. Enhance user account forms with discovered fields",
+    "4. Add real-time data streaming",
+    "5. Implement portfolio tracking",
+    "6. Add order management system"
+  ]
+}

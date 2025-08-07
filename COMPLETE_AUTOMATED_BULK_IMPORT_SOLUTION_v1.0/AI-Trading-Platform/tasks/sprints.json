@@ -1,0 +1,34 @@
+[
+  {
+    "id": "sprint_001",
+    "name": "HLDD Integration Sprint",
+    "start_date": "2025-07-07",
+    "end_date": "2025-07-21",
+    "capacity_hours": 160,
+    "tasks": [
+      "hldd_section_009_task_11",
+      "hldd_section_019_task_22",
+      "hldd_section_019_task_23",
+      "hldd_section_024_task_33",
+      "hldd_section_029_task_37",
+      "hldd_section_012_task_4",
+      "hldd_section_012_task_5",
+      "hldd_section_017_task_8",
+      "hldd_section_007_task_7",
+      "hldd_section_013_task_19",
+      "hldd_section_005_task_4",
+      "hldd_section_008_task_9",
+      "hldd_section_012_task_16",
+      "hldd_section_012_task_17",
+      "hldd_section_016_task_20",
+      "hldd_section_019_task_21"
+    ],
+    "status": "planned",
+    "goals": [
+      "Complete HLDD-Notion integration",
+      "Implement semantic sync framework",
+      "Establish task routing system"
+    ],
+    "retrospective_notes": null
+  }
+]

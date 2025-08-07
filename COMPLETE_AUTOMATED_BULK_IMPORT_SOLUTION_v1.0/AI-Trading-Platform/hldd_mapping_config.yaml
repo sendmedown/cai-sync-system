@@ -1,0 +1,16 @@
+content_processing:
+  create_task_items: true
+  extract_diagrams: true
+  generate_summaries: true
+  process_code_blocks: true
+hldd_source_files:
+- docs/HLDD_DIMIA_INTEGRATION_PLAN.md
+- docs/DNA_INSPIRED_MIDDLEWARE_ARCHITECTURE.md
+notion_workspace:
+  database_id: YOUR_DATABASE_ID
+  parent_page_id: YOUR_PARENT_PAGE_ID
+sync_rules:
+  auto_create_pages: true
+  create_cross_references: true
+  preserve_hierarchy: true
+  update_existing: true

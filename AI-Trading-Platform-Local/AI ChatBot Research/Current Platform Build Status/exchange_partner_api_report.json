@@ -1,0 +1,605 @@
+{
+  "timestamp": "2025-07-10T05:54:08.384905",
+  "exchange_partners": {
+    "coinbase": {
+      "exchange_name": "Coinbase",
+      "api_type": "Advanced Trade API & Exchange API",
+      "base_urls": {
+        "coinbase_app": "https://api.coinbase.com/v2/",
+        "advanced_trade": "https://api.coinbase.com/api/v3/",
+        "exchange": "https://api.exchange.coinbase.com/"
+      },
+      "authentication": {
+        "method": "API Key + Secret + Passphrase",
+        "oauth_support": true,
+        "headers": [
+          "CB-ACCESS-KEY",
+          "CB-ACCESS-SIGN",
+          "CB-ACCESS-TIMESTAMP",
+          "CB-ACCESS-PASSPHRASE"
+        ]
+      },
+      "user_registration_fields": {
+        "personal_information": {
+          "required": [
+            "email",
+            "first_name",
+            "last_name",
+            "date_of_birth",
+            "phone_number",
+            "country_of_residence"
+          ],
+          "optional": [
+            "middle_name",
+            "preferred_name"
+          ]
+        },
+        "address_information": {
+          "required": [
+            "street_address",
+            "city",
+            "state_province",
+            "postal_code",
+            "country"
+          ],
+          "optional": [
+            "apartment_unit",
+            "address_line_2"
+          ]
+        },
+        "identity_verification": {
+          "required": [
+            "government_id_type",
+            "government_id_number",
+            "id_document_upload",
+            "selfie_verification"
+          ],
+          "optional": [
+            "proof_of_address_document"
+          ]
+        },
+        "financial_information": {
+          "required": [
+            "employment_status",
+            "source_of_funds",
+            "intended_use",
+            "annual_income_range"
+          ],
+          "optional": [
+            "employer_name",
+            "net_worth"
+          ]
+        }
+      },
+      "account_profile_structure": {
+        "profile_id": "string (UUID)",
+        "user_id": "string (UUID)",
+        "name": "string",
+        "active": "boolean",
+        "is_default": "boolean",
+        "has_margin": "boolean",
+        "created_at": "datetime",
+        "accounts": [
+          {
+            "id": "string (UUID)",
+            "currency": "string",
+            "balance": "decimal",
+            "available": "decimal",
+            "hold": "decimal",
+            "profile_id": "string (UUID)",
+            "trading_enabled": "boolean"
+          }
+        ]
+      },
+      "api_endpoints": {
+        "get_profiles": "GET /profiles",
+        "get_profile_by_id": "GET /profiles/{profile_id}",
+        "get_accounts": "GET /accounts",
+        "get_account_by_id": "GET /accounts/{account_id}",
+        "create_profile": "POST /profiles",
+        "transfer_funds": "POST /profiles/transfer"
+      },
+      "compliance_requirements": {
+        "kyc_levels": [
+          "Level 1",
+          "Level 2",
+          "Level 3"
+        ],
+        "aml_screening": true,
+        "sanctions_check": true,
+        "pep_screening": true,
+        "document_requirements": [
+          "Government-issued photo ID",
+          "Proof of address (utility bill, bank statement)",
+          "Selfie with ID (for enhanced verification)"
+        ]
+      },
+      "trading_permissions": {
+        "spot_trading": true,
+        "margin_trading": true,
+        "futures_trading": false,
+        "options_trading": false,
+        "api_trading": true,
+        "withdrawal_limits": "Based on verification level"
+      }
+    },
+    "binance": {
+      "exchange_name": "Binance",
+      "api_type": "Spot API & Futures API",
+      "base_urls": {
+        "spot_api": "https://api.binance.com/api/v3/",
+        "futures_api": "https://fapi.binance.com/fapi/v1/",
+        "margin_api": "https://api.binance.com/sapi/v1/"
+      },
+      "authentication": {
+        "method": "API Key + Secret",
+        "oauth_support": false,
+        "headers": [
+          "X-MBX-APIKEY"
+        ],
+        "signature_method": "HMAC SHA256"
+      },
+      "user_registration_fields": {
+        "personal_information": {
+          "required": [
+            "email",
+            "first_name",
+            "last_name",
+            "date_of_birth",
+            "nationality",
+            "phone_number",
+            "country_of_residence"
+          ],
+          "optional": [
+            "middle_name",
+            "referral_code"
+          ]
+        },
+        "address_information": {
+          "required": [
+            "residential_address",
+            "city",
+            "state_province",
+            "postal_code",
+            "country"
+          ],
+          "optional": [
+            "apartment_number"
+          ]
+        },
+        "identity_verification": {
+          "required": [
+            "id_type",
+            "id_number",
+            "id_front_image",
+            "id_back_image",
+            "selfie_image"
+          ],
+          "optional": [
+            "proof_of_address_document"
+          ]
+        },
+        "financial_information": {
+          "required": [
+            "source_of_funds",
+            "employment_status",
+            "annual_income",
+            "trading_experience"
+          ],
+          "optional": [
+            "employer_details",
+            "investment_experience"
+          ]
+        }
+      },
+      "account_information_structure": {
+        "account_type": "string (SPOT, MARGIN, FUTURES)",
+        "fee_tier": "integer (0-9)",
+        "can_trade": "boolean",
+        "can_withdraw": "boolean",
+        "can_deposit": "boolean",
+        "update_time": "timestamp",
+        "multi_assets_margin": "boolean",
+        "trade_group_id": "integer",
+        "balances": [
+          {
+            "asset": "string",
+            "wallet_balance": "decimal",
+            "unrealized_profit": "decimal",
+            "margin_balance": "decimal",
+            "maint_margin": "decimal",
+            "initial_margin": "decimal",
+            "available_balance": "decimal",
+            "max_withdraw_amount": "decimal"
+          }
+        ],
+        "positions": [
+          {
+            "symbol": "string",
+            "position_amt": "decimal",
+            "entry_price": "decimal",
+            "unrealized_profit": "decimal",
+            "leverage": "integer",
+            "position_side": "string (LONG/SHORT/BOTH)"
+          }
+        ]
+      },
+      "api_endpoints": {
+        "account_info": "GET /api/v3/account",
+        "futures_account": "GET /fapi/v2/account",
+        "margin_account": "GET /sapi/v1/margin/account",
+        "user_asset": "POST /sapi/v3/asset/getUserAsset",
+        "trading_status": "GET /sapi/v1/account/apiTradingStatus",
+        "sub_account_list": "GET /sapi/v1/sub-account/list"
+      },
+      "compliance_requirements": {
+        "kyc_levels": [
+          "Basic",
+          "Intermediate",
+          "Advanced"
+        ],
+        "aml_screening": true,
+        "sanctions_check": true,
+        "pep_screening": true,
+        "document_requirements": [
+          "Government-issued ID (Passport, Driver's License, National ID)",
+          "Proof of address (Bank statement, Utility bill)",
+          "Facial verification",
+          "Additional documents for enhanced verification"
+        ]
+      },
+      "trading_permissions": {
+        "spot_trading": true,
+        "margin_trading": true,
+        "futures_trading": true,
+        "options_trading": true,
+        "api_trading": true,
+        "withdrawal_limits": "Based on verification level and VIP status"
+      }
+    },
+    "kraken": {
+      "exchange_name": "Kraken",
+      "api_type": "REST API & Embed API",
+      "base_urls": {
+        "public_api": "https://api.kraken.com/0/public/",
+        "private_api": "https://api.kraken.com/0/private/",
+        "embed_api": "https://embed.kraken.com/b2b/"
+      },
+      "authentication": {
+        "method": "API Key + Private Key",
+        "oauth_support": false,
+        "headers": [
+          "API-Key",
+          "API-Sign"
+        ],
+        "signature_method": "HMAC SHA512"
+      },
+      "user_registration_fields": {
+        "personal_information": {
+          "required": [
+            "email",
+            "first_name",
+            "last_name",
+            "date_of_birth",
+            "phone",
+            "nationalities",
+            "external_id"
+          ],
+          "optional": [
+            "middle_name",
+            "city_of_birth",
+            "country_of_birth",
+            "language"
+          ]
+        },
+        "address_information": {
+          "required": [
+            "line1",
+            "city",
+            "postal_code",
+            "country"
+          ],
+          "optional": [
+            "line2",
+            "province"
+          ]
+        },
+        "identity_verification": {
+          "required": [
+            "identity_verification",
+            "residence_verification",
+            "selfie_verification"
+          ],
+          "optional": [
+            "sanctions_check",
+            "pep_check",
+            "negative_news_check"
+          ]
+        },
+        "financial_information": {
+          "required": [
+            "occupation",
+            "tos_version_accepted"
+          ],
+          "optional": [
+            "tax_ids"
+          ]
+        }
+      },
+      "user_profile_structure": {
+        "user": "string (IIBAN format)",
+        "external_id": "string (partner-defined)",
+        "user_type": "string (individual/corporate)",
+        "status": {
+          "state": "string (ok/pending/blocked)",
+          "required_actions": [
+            {
+              "action_type": "verification",
+              "verification_type": "string",
+              "reasons": [
+                "initial_onboarding"
+              ],
+              "deadline": "datetime"
+            }
+          ]
+        },
+        "created_at": "datetime",
+        "full_name": {
+          "first_name": "string",
+          "middle_name": "string",
+          "last_name": "string"
+        },
+        "residence": {
+          "line1": "string",
+          "line2": "string",
+          "city": "string",
+          "postal_code": "string",
+          "province": "string",
+          "country": "CountryCode"
+        }
+      },
+      "api_endpoints": {
+        "create_user": "POST /b2b/users",
+        "get_user": "GET /b2b/users/{user}",
+        "update_user": "PUT /b2b/users/{user}",
+        "submit_verification": "POST /b2b/users/{user}/verifications",
+        "get_portfolio_summary": "GET /b2b/users/{user}/portfolios/summary",
+        "account_balance": "POST /0/private/Balance",
+        "trade_balance": "POST /0/private/TradeBalance"
+      },
+      "compliance_requirements": {
+        "kyc_levels": [
+          "Starter",
+          "Intermediate",
+          "Pro"
+        ],
+        "aml_screening": true,
+        "sanctions_check": true,
+        "pep_screening": true,
+        "document_requirements": [
+          "Government-issued photo ID",
+          "Proof of residence",
+          "Selfie verification",
+          "Additional verification for higher limits"
+        ]
+      },
+      "trading_permissions": {
+        "spot_trading": true,
+        "margin_trading": true,
+        "futures_trading": true,
+        "options_trading": false,
+        "api_trading": true,
+        "withdrawal_limits": "Based on verification tier"
+      }
+    }
+  },
+  "unified_field_mapping": {
+    "first_name": {
+      "coinbase_field": "first_name",
+      "binance_field": "first_name",
+      "kraken_field": "full_name.first_name",
+      "field_type": "string",
+      "required": true,
+      "validation": "min_length: 1, max_length: 50"
+    },
+    "middle_name": {
+      "coinbase_field": "middle_name",
+      "binance_field": "middle_name",
+      "kraken_field": "full_name.middle_name",
+      "field_type": "string",
+      "required": false,
+      "validation": "max_length: 50"
+    },
+    "last_name": {
+      "coinbase_field": "last_name",
+      "binance_field": "last_name",
+      "kraken_field": "full_name.last_name",
+      "field_type": "string",
+      "required": true,
+      "validation": "min_length: 1, max_length: 50"
+    },
+    "email": {
+      "coinbase_field": "email",
+      "binance_field": "email",
+      "kraken_field": "email",
+      "field_type": "email",
+      "required": true,
+      "validation": "valid_email_format"
+    },
+    "phone_number": {
+      "coinbase_field": "phone_number",
+      "binance_field": "phone_number",
+      "kraken_field": "phone",
+      "field_type": "string",
+      "required": true,
+      "validation": "E.164_format"
+    },
+    "date_of_birth": {
+      "coinbase_field": "date_of_birth",
+      "binance_field": "date_of_birth",
+      "kraken_field": "date_of_birth",
+      "field_type": "date",
+      "required": true,
+      "validation": "age >= 18"
+    },
+    "nationality": {
+      "coinbase_field": "country_of_residence",
+      "binance_field": "nationality",
+      "kraken_field": "nationalities",
+      "field_type": "country_code",
+      "required": true,
+      "validation": "ISO_3166_country_code"
+    },
+    "street_address": {
+      "coinbase_field": "street_address",
+      "binance_field": "residential_address",
+      "kraken_field": "residence.line1",
+      "field_type": "string",
+      "required": true,
+      "validation": "min_length: 5, max_length: 100"
+    },
+    "address_line_2": {
+      "coinbase_field": "address_line_2",
+      "binance_field": "apartment_number",
+      "kraken_field": "residence.line2",
+      "field_type": "string",
+      "required": false,
+      "validation": "max_length: 50"
+    },
+    "city": {
+      "coinbase_field": "city",
+      "binance_field": "city",
+      "kraken_field": "residence.city",
+      "field_type": "string",
+      "required": true,
+      "validation": "min_length: 1, max_length: 50"
+    },
+    "state_province": {
+      "coinbase_field": "state_province",
+      "binance_field": "state_province",
+      "kraken_field": "residence.province",
+      "field_type": "string",
+      "required": false,
+      "validation": "max_length: 50"
+    },
+    "postal_code": {
+      "coinbase_field": "postal_code",
+      "binance_field": "postal_code",
+      "kraken_field": "residence.postal_code",
+      "field_type": "string",
+      "required": true,
+      "validation": "valid_postal_code_format"
+    },
+    "country": {
+      "coinbase_field": "country",
+      "binance_field": "country",
+      "kraken_field": "residence.country",
+      "field_type": "country_code",
+      "required": true,
+      "validation": "ISO_3166_country_code"
+    },
+    "employment_status": {
+      "coinbase_field": "employment_status",
+      "binance_field": "employment_status",
+      "kraken_field": "occupation",
+      "field_type": "enum",
+      "required": true,
+      "validation": "predefined_employment_types"
+    },
+    "annual_income": {
+      "coinbase_field": "annual_income_range",
+      "binance_field": "annual_income",
+      "kraken_field": "N/A",
+      "field_type": "enum",
+      "required": true,
+      "validation": "income_range_brackets"
+    },
+    "source_of_funds": {
+      "coinbase_field": "source_of_funds",
+      "binance_field": "source_of_funds",
+      "kraken_field": "N/A",
+      "field_type": "enum",
+      "required": true,
+      "validation": "predefined_fund_sources"
+    },
+    "external_id": {
+      "coinbase_field": "N/A",
+      "binance_field": "N/A",
+      "kraken_field": "external_id",
+      "field_type": "string",
+      "required": true,
+      "validation": "unique_partner_identifier"
+    },
+    "tos_version": {
+      "coinbase_field": "N/A",
+      "binance_field": "N/A",
+      "kraken_field": "tos_version_accepted",
+      "field_type": "integer",
+      "required": true,
+      "validation": "current_tos_version"
+    }
+  },
+  "integration_summary": {
+    "total_required_fields": 43,
+    "total_optional_fields": 25,
+    "common_fields_across_all": [
+      "first_name",
+      "last_name",
+      "email",
+      "phone_number",
+      "date_of_birth",
+      "street_address",
+      "city",
+      "postal_code",
+      "country"
+    ],
+    "exchange_specific_fields": {
+      "coinbase": [
+        "profile_id",
+        "has_margin"
+      ],
+      "binance": [
+        "fee_tier",
+        "multi_assets_margin",
+        "trade_group_id"
+      ],
+      "kraken": [
+        "external_id",
+        "tos_version_accepted",
+        "user_type"
+      ]
+    }
+  },
+  "api_capabilities": {
+    "user_creation": {
+      "coinbase": false,
+      "binance": false,
+      "kraken": true
+    },
+    "profile_management": {
+      "coinbase": true,
+      "binance": true,
+      "kraken": true
+    },
+    "account_information": {
+      "coinbase": true,
+      "binance": true,
+      "kraken": true
+    },
+    "balance_retrieval": {
+      "coinbase": true,
+      "binance": true,
+      "kraken": true
+    }
+  },
+  "implementation_recommendations": [
+    "1. Use Kraken Embed API for programmatic user creation",
+    "2. Implement unified field mapping for cross-exchange compatibility",
+    "3. Create Bio-Quantum user profiles that sync with all three exchanges",
+    "4. Implement OAuth flow for Coinbase integration",
+    "5. Use API keys for Binance and Kraken integration",
+    "6. Implement comprehensive KYC/AML compliance workflow",
+    "7. Create unified balance and portfolio tracking",
+    "8. Implement real-time sync across all exchange accounts"
+  ]
+}

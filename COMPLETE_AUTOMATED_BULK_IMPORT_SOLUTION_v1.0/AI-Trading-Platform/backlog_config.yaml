@@ -1,0 +1,52 @@
+auto_assignment_rules:
+  architecture:
+  - richard
+  - manus
+  documentation:
+  - chatgpt
+  - manus
+  implementation:
+  - manus
+  project_management:
+  - richard
+  security:
+  - manus
+  - richard
+  testing:
+  - manus
+priority_weights:
+  critical: 100
+  high: 75
+  low: 25
+  medium: 50
+sprint_settings:
+  default_duration_weeks: 2
+  planning_buffer_hours: 8
+  review_buffer_hours: 4
+team_members:
+- capacity_hours_per_week: 40
+  id: richard
+  name: Richard (Project Lead)
+  role: project_manager
+  skills:
+  - project_management
+  - architecture
+  - strategy
+- capacity_hours_per_week: 168
+  id: manus
+  name: Manus AI
+  role: ai_developer
+  skills:
+  - implementation
+  - documentation
+  - testing
+  - integration
+- capacity_hours_per_week: 168
+  id: chatgpt
+  name: ChatGPT Assistant
+  role: ai_assistant
+  skills:
+  - analysis
+  - documentation
+  - planning
+  - research

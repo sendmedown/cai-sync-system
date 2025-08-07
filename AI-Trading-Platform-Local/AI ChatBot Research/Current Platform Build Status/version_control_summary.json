@@ -1,0 +1,40 @@
+{
+  "project": "Bio-Quantum AI Trading Platform",
+  "current_version": {
+    "version": "v1.0.0",
+    "tag": "YouTube-Ready",
+    "branch": "main",
+    "timestamp": "2025-07-10T05:21:20.871681",
+    "description": "Complete YouTube production package with enhanced platform features"
+  },
+  "total_versions": 1,
+  "available_tags": [
+    "YouTube-Ready"
+  ],
+  "branches": {
+    "main": 1,
+    "development": 0,
+    "youtube-production": 0
+  },
+  "latest_stats": {
+    "total_files": 1667,
+    "categories": {
+      "videos": 4,
+      "audio": 4,
+      "images": 30,
+      "documents": 41,
+      "code": 737,
+      "data": 851
+    },
+    "total_size_mb": 198.17494201660156
+  },
+  "version_history": [
+    {
+      "version": "v1.0.0",
+      "tag": "YouTube-Ready",
+      "timestamp": "2025-07-10T05:21:20.871681",
+      "description": "Complete YouTube production package with enhanced platform features",
+      "files": 1667
+    }
+  ]
+}

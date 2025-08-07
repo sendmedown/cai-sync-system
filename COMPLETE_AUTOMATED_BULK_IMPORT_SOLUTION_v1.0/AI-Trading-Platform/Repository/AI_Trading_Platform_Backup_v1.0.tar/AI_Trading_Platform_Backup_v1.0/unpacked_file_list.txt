@@ -1,0 +1,11 @@
+Folder PATH listing for volume Local Disk
+Volume serial number is 00000240 9E09:4859
+C:.
+    PHASE_2_COMPLETION_SUMMARY.pdf
+    PHASE_2_DEMO_SCRIPT_PACKAGE_v1.0.tar.gz
+    PHASE_3_TESTING_RESULTS.pdf
+    unpacked_file_list.txt
+    Updated_HLDD_AI_Trading_Platform_2025.docx
+    
+No subfolders exist 
+

@@ -1,0 +1,42 @@
+import requests
+from bs4 import BeautifulSoup
+
+def get_bible_verse(verse_reference):
+  """Returns the Bible verse at the given reference."""
+  url = f"https://biblegateway.com/passage/?search={verse_reference}&version=NIV"
+  response = requests.get(url)
+  soup = BeautifulSoup(response.content, "html.parser")
+
+  # Get the verse text.
+  verse_text = soup.find("span", class_="verse").text
+
+  # Get the hyperlinks to the Greek and Hebrew translations.
+  greek_link = soup.find("a", class_="greek")["href"]
+  hebrew_link = soup.find("a", class_="hebrew")["href"]
+
+  # Get the recommendations for related study texts.
+  related_study_texts = []
+  for link in soup.find_all("a", class_="related-study-text"):
+    related_study_texts.append(link["href"])
+
+  return verse_text, greek_link, hebrew_link, related_study_texts
+
+def main():
+  # Get the verse reference from the user.
+  verse_reference = input("Enter a Bible verse reference: ")
+
+  # Get the Bible verse at the given reference.
+  verse_text, greek_link, hebrew_link, related_study_texts = get_bible_verse(verse_reference)
+
+  # Display the verse text and hyperlinks.
+  print(f"\n{verse_text}")
+  print(f"\nGreek translation: {greek_link}")
+  print(f"\nHebrew translation: {hebrew_link}")
+
+  # Display the recommendations for related study texts.
+  print("\nRecommendations for related study texts:")
+  for link in related_study_texts:
+    print(link)
+
+if __name__ == "__main__":
+  main()

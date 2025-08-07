@@ -1,0 +1,237 @@
+{
+  "system_status": "ACTIVE",
+  "total_files": 1667,
+  "last_sync": "2025-07-10T02:37:39.333914",
+  "file_categories": {
+    "videos": 4,
+    "audio": 4,
+    "images": 30,
+    "documents": 41,
+    "code": 737,
+    "data": 851
+  },
+  "recent_files": [
+    "COMPREHENSIVE_DEMO_SCRIPT_PACKAGE.md",
+    "BIO-QUANTUM_AI_TRADING_PLATFORM_-_VIDEO_PRODUCTION_GUIDE.pdf",
+    "BIO-QUANTUM_AI_TRADING_PLATFORM_-_VIDEO_SCRIPT.pdf",
+    "simplified_routing_diagram.png",
+    "quantum_security_visual.png",
+    "demo_flow_diagram.png",
+    "blockchain_test_results_visual.png",
+    "Platform_Shielding_Defense_Layers.png",
+    "Phase_7_Advanced_Features_Roadmap.png",
+    "Phase_6_Development_Tracks.png",
+    "Phase_6_7_Execution_Timeline.png",
+    "Network_Isolation_Security_Zones.png",
+    "NIDR_AI_Agent_Security_System.png",
+    "Investment_ROI_Analysis_Dashboard.png",
+    "DIMIA_Security_Gateway_Architecture.png",
+    "DIMIA_Mobile_Responsive_Design.png",
+    "DIMIA_Knowledge_Codex_Interface.png",
+    "DIMIA_Knowledge_Codex.png",
+    "DIMIA_Integration_Flow_Architecture.png",
+    "DIMIA_Implementation_Timeline.png"
+  ],
+  "large_files": [
+    {
+      "name": "Bio_Quantum_AI_Complete_Voiceover.wav",
+      "size_mb": 20.1
+    },
+    {
+      "name": "DIMIA_INTEGRATION_EXPORT_v1.0.tar.gz",
+      "size_mb": 22.3
+    },
+    {
+      "name": "Bio_Quantum_AI_YouTube_Video_Kit.tar",
+      "size_mb": 8.2
+    },
+    {
+      "name": "Bio_Quantum_AI_YouTube_Video_Kit.tar.gz",
+      "size_mb": 6.8
+    },
+    {
+      "name": "Bio_Quantum_AI_SIMPLE_COMBINATION.mp4",
+      "size_mb": 15.5
+    },
+    {
+      "name": "python",
+      "size_mb": 6.6
+    },
+    {
+      "name": "PHASE_6_7_EXECUTION_PACKAGE_v1.0.tar.gz",
+      "size_mb": 7.4
+    },
+    {
+      "name": "python3.11",
+      "size_mb": 6.6
+    },
+    {
+      "name": "python3",
+      "size_mb": 6.6
+    }
+  ],
+  "api_endpoints": {
+    "base_url": "/api/files",
+    "endpoints": {
+      "list_all": "GET /api/files/list",
+      "list_by_category": "GET /api/files/list/{category}",
+      "get_file": "GET /api/files/get/{filename}",
+      "search": "GET /api/files/search?q={query}",
+      "info": "GET /api/files/info/{filename}",
+      "sync": "POST /api/files/sync",
+      "status": "GET /api/files/status"
+    },
+    "categories": [
+      "videos",
+      "audio",
+      "images",
+      "documents",
+      "code",
+      "data"
+    ]
+  },
+  "bridge_config": {
+    "manus_api_endpoint": "https://api.manus.space",
+    "notion_integration": true,
+    "auto_sync": true,
+    "sync_interval": 30,
+    "file_categories": [
+      "videos",
+      "audio",
+      "images",
+      "documents",
+      "code"
+    ],
+    "notion_token": "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",
+    "notion_database_id": "YOUR_DATABASE_ID_HERE",
+    "notion_parent_page_id": "222dd3a8b51180b79ffce3316141e2e4",
+    "manus_api_key": "YOUR_MANUS_API_KEY_HERE",
+    "sync_directories": [
+      "docs/",
+      "tasks/",
+      "assets/",
+      "presentations/",
+      "reports/"
+    ],
+    "excluded_patterns": [
+      "*.tmp",
+      "*.log",
+      "*.cache",
+      ".git/",
+      "__pycache__/",
+      "node_modules/",
+      ".env",
+      "*.pyc",
+      ".DS_Store",
+      "Thumbs.db"
+    ],
+    "enable_bidirectional": true,
+    "enable_auto_backup": true,
+    "max_file_size_mb": 50,
+    "content_processing": {
+      "markdown": {
+        "preserve_formatting": true,
+        "convert_to_notion_blocks": true,
+        "include_metadata": true
+      },
+      "csv": {
+        "create_notion_database": true,
+        "update_existing_records": true,
+        "preserve_formulas": false
+      },
+      "images": {
+        "optimize_for_web": true,
+        "max_width": 1920,
+        "max_height": 1080,
+        "quality": 85
+      }
+    },
+    "access_control": {
+      "default_level": "internal",
+      "content_rules": {
+        "docs/public/": "public",
+        "docs/internal/": "internal",
+        "tasks/": "team",
+        "presentations/investor/": "team"
+      }
+    },
+    "notifications": {
+      "enable_email": false,
+      "email_address": "your-email@example.com",
+      "enable_slack": false,
+      "slack_webhook": "YOUR_SLACK_WEBHOOK_URL",
+      "notify_on": [
+        "sync_errors",
+        "large_file_uploads",
+        "access_violations"
+      ]
+    },
+    "advanced": {
+      "api_rate_limit": 10,
+      "max_retries": 3,
+      "retry_delay": 5,
+      "log_level": "INFO",
+      "log_file": "sync.log",
+      "max_log_size_mb": 10,
+      "batch_size": 10,
+      "concurrent_uploads": 3,
+      "encrypt_local_cache": true,
+      "verify_ssl_certificates": true,
+      "backup_directory": "backups/",
+      "max_backup_age_days": 30,
+      "compress_backups": true
+    },
+    "project": {
+      "name": "Bio-Quantum AI Trading Platform",
+      "version": "1.0",
+      "hldd_file": "HLDD_DIMIA_INTEGRATION_PLAN.md",
+      "investor_deck": "INVESTOR_CYBERSECURITY_PRESENTATION.md",
+      "notion_structure": {
+        "documentation_page": "Documentation",
+        "tasks_database": "Project Tasks",
+        "assets_page": "Assets & Media",
+        "presentations_page": "Presentations"
+      },
+      "manus_preferences": {
+        "auto_assign_tasks": true,
+        "priority_threshold": 3,
+        "content_types": [
+          "document",
+          "code",
+          "presentation"
+        ]
+      }
+    },
+    "development": {
+      "enable_debug_mode": false,
+      "test_mode": false,
+      "dry_run": false,
+      "test_notion_page": "Test Sync Page",
+      "test_directory": "test_sync/"
+    },
+    "hooks": {
+      "pre_sync": null,
+      "post_sync": null,
+      "on_error": null
+    },
+    "monitoring": {
+      "enable_metrics": true,
+      "metrics_file": "sync_metrics.json",
+      "track_sync_times": true,
+      "track_file_sizes": true,
+      "track_error_rates": true,
+      "health_check_interval": 300,
+      "health_check_endpoint": "/health"
+    },
+    "compliance": {
+      "enable_audit_log": true,
+      "audit_log_file": "audit.log",
+      "retain_deleted_files": true,
+      "retention_period_days": 90,
+      "anonymize_user_data": false,
+      "encrypt_sensitive_content": true,
+      "gdpr_compliance": true,
+      "data_classification": true
+    }
+  }
+}

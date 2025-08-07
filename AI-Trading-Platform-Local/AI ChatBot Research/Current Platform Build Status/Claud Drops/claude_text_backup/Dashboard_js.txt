@@ -1,0 +1,38 @@
+import React, { useState, useEffect } from 'react';
+import { Line } from 'react-chartjs-2';
+import { motion, AnimatePresence } from 'framer-motion';
+import axios from 'axios';
+import './Dashboard.css'; // Assumed CSS for tooltip alignment
+
+const AIPopup = ({ recommendation, onClose }) => (
+  <motion.div
+    initial={{ opacity: 0, y: -20 }}
+    animate={{ opacity: 1, y: 0 }}
+    exit={{ opacity: 0, y: -20 }}
+    transition={{ duration: 0.4 }}
+    style={{
+      position: 'absolute',
+      top: '20px',
+      right: '20px',
+      background: '#F0F4F8',
+      padding: '15px',
+      borderRadius: '8px',
+      boxShadow: '0 4px 8px rgba(0,0,0,0.2)',
+      zIndex: 1000,
+    }}
+  >
+    <p>
+      <strong>{recommendation.action} {recommendation.ticker}</strong> at ${recommendation.price} (
+      {recommendation.confidence})<br />
+      {recommendation.portfolioImpact}
+    </p>
+    <button
+      onClick={onClose}
+      style={{ background: '#FF6B6B', color: 'white', padding: '5px 10px', border: 'none', borderRadius: '5px' }}
+    >
+      Close
+    </button>
+  </motion.div>
+);
+
+// ... rest of Dashboard component omitted for brevity

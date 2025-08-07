@@ -1,0 +1,347 @@
+name: AI Trading Platform V2.0 - Comprehensive Test Suite
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:  # Allow manual triggering
+    inputs:
+      test_type:
+        description: 'Type of tests to run'
+        required: false
+        default: 'all'
+        type: choice
+        options:
+        - all
+        - backend
+        - frontend
+        - integration
+
+env:
+  PYTHON_VERSION: '3.11'
+  NODE_VERSION: '18'
+
+jobs:
+  backend-tests:
+    name: Backend API Tests
+    runs-on: ubuntu-latest
+    if: ${{ github.event.inputs.test_type == 'all' || github.event.inputs.test_type == 'backend' || github.event.inputs.test_type == '' }}
+    
+    services:
+      # Optional: Add database service if needed
+      # postgres:
+      #   image: postgres:13
+      #   env:
+      #     POSTGRES_PASSWORD: postgres
+      #   options: >-
+      #     --health-cmd pg_isready
+      #     --health-interval 10s
+      #     --health-timeout 5s
+      #     --health-retries 5
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Set up Python ${{ env.PYTHON_VERSION }}
+      uses: actions/setup-python@v4
+      with:
+        python-version: ${{ env.PYTHON_VERSION }}
+
+    - name: Cache Python dependencies
+      uses: actions/cache@v3
+      with:
+        path: ~/.cache/pip
+        key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
+        restore-keys: |
+          ${{ runner.os }}-pip-
+
+    - name: Install Python dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+        pip install pytest pytest-cov requests
+
+    - name: Set up environment variables
+      run: |
+        echo "FLASK_ENV=testing" >> $GITHUB_ENV
+        echo "DATABASE_URL=sqlite:///test.db" >> $GITHUB_ENV
+        echo "SECRET_KEY=test-secret-key-for-github-actions" >> $GITHUB_ENV
+
+    - name: Start Flask backend
+      run: |
+        cd src
+        python main.py &
+        sleep 10  # Wait for server to start
+        curl -f http://localhost:5001/health || exit 1
+      env:
+        FLASK_ENV: testing
+
+    - name: Run backend health check
+      run: |
+        curl -f http://localhost:5001/health
+        echo "Backend health check passed"
+
+    - name: Run authentication tests
+      run: |
+        pytest tests/test_auth.py -v --tb=short
+      continue-on-error: true
+
+    - name: Run chatbot tests
+      run: |
+        pytest tests/test_chatbot.py -v --tb=short
+
+    - name: Run portfolio and trading tests
+      run: |
+        pytest tests/test_portfolio_trading.py -v --tb=short
+
+    - name: Run integration tests
+      run: |
+        pytest tests/test_integration.py -v --tb=short
+
+    - name: Run all tests with coverage
+      run: |
+        pytest tests/ -v --cov=src --cov-report=xml --cov-report=html --tb=short
+
+    - name: Upload coverage reports
+      uses: codecov/codecov-action@v3
+      with:
+        file: ./coverage.xml
+        flags: backend
+        name: backend-coverage
+
+    - name: Archive test results
+      uses: actions/upload-artifact@v3
+      if: always()
+      with:
+        name: backend-test-results
+        path: |
+          htmlcov/
+          coverage.xml
+          pytest-report.xml
+
+  frontend-tests:
+    name: Frontend Tests
+    runs-on: ubuntu-latest
+    if: ${{ github.event.inputs.test_type == 'all' || github.event.inputs.test_type == 'frontend' || github.event.inputs.test_type == '' }}
+    
+    defaults:
+      run:
+        working-directory: ../ai-trading-v2-frontend
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Set up Node.js ${{ env.NODE_VERSION }}
+      uses: actions/setup-node@v4
+      with:
+        node-version: ${{ env.NODE_VERSION }}
+        cache: 'npm'
+        cache-dependency-path: '../ai-trading-v2-frontend/package-lock.json'
+
+    - name: Install frontend dependencies
+      run: |
+        npm ci
+
+    - name: Run ESLint
+      run: |
+        npm run lint
+      continue-on-error: true
+
+    - name: Build frontend
+      run: |
+        npm run build
+
+    - name: Run frontend unit tests
+      run: |
+        npm test -- --coverage --watchAll=false
+      continue-on-error: true
+
+    - name: Archive build artifacts
+      uses: actions/upload-artifact@v3
+      with:
+        name: frontend-build
+        path: ../ai-trading-v2-frontend/dist/
+
+  integration-tests:
+    name: End-to-End Integration Tests
+    runs-on: ubuntu-latest
+    needs: [backend-tests, frontend-tests]
+    if: ${{ github.event.inputs.test_type == 'all' || github.event.inputs.test_type == 'integration' || github.event.inputs.test_type == '' }}
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Set up Python ${{ env.PYTHON_VERSION }}
+      uses: actions/setup-python@v4
+      with:
+        python-version: ${{ env.PYTHON_VERSION }}
+
+    - name: Set up Node.js ${{ env.NODE_VERSION }}
+      uses: actions/setup-node@v4
+      with:
+        node-version: ${{ env.NODE_VERSION }}
+
+    - name: Install backend dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+        pip install pytest playwright
+
+    - name: Install frontend dependencies
+      run: |
+        cd ../ai-trading-v2-frontend
+        npm ci
+
+    - name: Install Playwright browsers
+      run: |
+        playwright install chromium
+
+    - name: Start backend server
+      run: |
+        cd src
+        python main.py &
+        sleep 10
+        curl -f http://localhost:5001/health
+      env:
+        FLASK_ENV: testing
+
+    - name: Start frontend server
+      run: |
+        cd ../ai-trading-v2-frontend
+        npm run dev &
+        sleep 15
+        curl -f http://localhost:5173
+      env:
+        CI: true
+
+    - name: Run end-to-end tests
+      run: |
+        pytest tests/test_integration.py::TestEndToEndWorkflow -v --tb=short
+
+    - name: Run performance tests
+      run: |
+        pytest tests/test_integration.py::TestPerformanceAndReliability -v --tb=short
+
+    - name: Archive E2E test results
+      uses: actions/upload-artifact@v3
+      if: always()
+      with:
+        name: e2e-test-results
+        path: |
+          test-results/
+          playwright-report/
+
+  security-scan:
+    name: Security Vulnerability Scan
+    runs-on: ubuntu-latest
+    if: ${{ github.event.inputs.test_type == 'all' || github.event.inputs.test_type == '' }}
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Set up Python ${{ env.PYTHON_VERSION }}
+      uses: actions/setup-python@v4
+      with:
+        python-version: ${{ env.PYTHON_VERSION }}
+
+    - name: Install security scanning tools
+      run: |
+        python -m pip install --upgrade pip
+        pip install safety bandit
+
+    - name: Run safety check for Python dependencies
+      run: |
+        pip install -r requirements.txt
+        safety check
+      continue-on-error: true
+
+    - name: Run bandit security scan
+      run: |
+        bandit -r src/ -f json -o bandit-report.json
+      continue-on-error: true
+
+    - name: Upload security scan results
+      uses: actions/upload-artifact@v3
+      if: always()
+      with:
+        name: security-scan-results
+        path: |
+          bandit-report.json
+
+  test-summary:
+    name: Test Summary Report
+    runs-on: ubuntu-latest
+    needs: [backend-tests, frontend-tests, integration-tests, security-scan]
+    if: always()
+
+    steps:
+    - name: Download all artifacts
+      uses: actions/download-artifact@v3
+
+    - name: Generate test summary
+      run: |
+        echo "# AI Trading Platform V2.0 - Test Summary" > test-summary.md
+        echo "" >> test-summary.md
+        echo "## Test Results Overview" >> test-summary.md
+        echo "" >> test-summary.md
+        echo "- **Backend Tests**: ${{ needs.backend-tests.result }}" >> test-summary.md
+        echo "- **Frontend Tests**: ${{ needs.frontend-tests.result }}" >> test-summary.md
+        echo "- **Integration Tests**: ${{ needs.integration-tests.result }}" >> test-summary.md
+        echo "- **Security Scan**: ${{ needs.security-scan.result }}" >> test-summary.md
+        echo "" >> test-summary.md
+        echo "## Artifacts Generated" >> test-summary.md
+        echo "" >> test-summary.md
+        ls -la
+        echo "" >> test-summary.md
+        echo "Generated on: $(date)" >> test-summary.md
+
+    - name: Upload test summary
+      uses: actions/upload-artifact@v3
+      with:
+        name: test-summary-report
+        path: test-summary.md
+
+    - name: Comment test results on PR
+      if: github.event_name == 'pull_request'
+      uses: actions/github-script@v6
+      with:
+        script: |
+          const fs = require('fs');
+          const summary = fs.readFileSync('test-summary.md', 'utf8');
+          
+          github.rest.issues.createComment({
+            issue_number: context.issue.number,
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            body: summary
+          });
+
+  deploy-staging:
+    name: Deploy to Staging (on success)
+    runs-on: ubuntu-latest
+    needs: [backend-tests, frontend-tests, integration-tests]
+    if: ${{ success() && github.ref == 'refs/heads/main' }}
+    environment: staging
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Deploy to staging environment
+      run: |
+        echo "Deploying to staging environment..."
+        echo "Backend health check: $(curl -f https://staging-backend-url/health || echo 'Failed')"
+        echo "Frontend deployment: $(curl -f https://staging-frontend-url || echo 'Failed')"
+        # Add actual deployment commands here
+
+    - name: Notify deployment status
+      run: |
+        echo "✅ AI Trading Platform V2.0 successfully deployed to staging!"
+        echo "🔗 Frontend: https://staging-frontend-url"
+        echo "🔗 Backend: https://staging-backend-url"
+

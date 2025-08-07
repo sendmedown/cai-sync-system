@@ -1,0 +1,40 @@
+{
+  "manifest": [
+    {
+      "file": "bulk_import_pipeline.py",
+      "agent": "Claude",
+      "purpose": "Batch import orchestration logic",
+      "linked_to": ["notion_sync.py", "test_sync_system.py"]
+    },
+    {
+      "file": "photonic_gateway_rl.py",
+      "agent": "Claude",
+      "purpose": "Reinforcement learning strategy handler",
+      "linked_to": ["dna_db_integration.py"]
+    },
+    {
+      "file": "notion_sync.py",
+      "agent": "Claude",
+      "purpose": "Semantic sync and Notion interface logic",
+      "linked_to": ["automated_notion_importer.py", "integrated_sync.py"]
+    },
+    {
+      "file": "dna_db_integration.py",
+      "agent": "Claude",
+      "purpose": "Knowledge graph and DNA DB injection logic",
+      "linked_to": ["photonic_gateway_rl.py", "compile_and_open.js"]
+    },
+    {
+      "file": "test_sync_system.py",
+      "agent": "Claude",
+      "purpose": "Unit test for full sync pipeline",
+      "linked_to": ["backlog_task_router.py", "hldd_integration_mapper.py"]
+    },
+    {
+      "file": "automated_notion_importer.py",
+      "agent": "Claude",
+      "purpose": "Notion ingestion script for structured knowledge base",
+      "linked_to": ["notion_sync.py"]
+    }
+  ]
+}

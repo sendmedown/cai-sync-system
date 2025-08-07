@@ -1,0 +1,16 @@
+Folder PATH listing for volume Local Disk
+Volume serial number is 0000010E 9E09:4859
+C:.
+    Competitive_Advantage_Matrix.png
+    DIMIA_Integration_Flow_Architecture.png
+    Investment_ROI_Analysis_Dashboard.png
+    MANUS_TASK_COORDINATION_FRAMEWORK.md
+    MANUS_TASK_COORDINATION_PLAN.md
+    NOTION_AUTOMATION_FRAMEWORK.md
+    Phase_6_7_Execution_Timeline.png
+    PHASE_6_7_TRACKER_SUMMARY.md
+    README.md
+    unpacked_file_list.txt
+    
+No subfolders exist 
+
