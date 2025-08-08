@@ -29,3 +29,12 @@ ChatGPT/
 "Manus files/"
 
 *_files/
+
+# Exclude large/binary files
+*.zip
+*.gz
+*.tar
+*.pptx
+*.mp4
+*.wav
+*.exe
