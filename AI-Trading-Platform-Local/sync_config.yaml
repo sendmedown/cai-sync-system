@@ -1,0 +1,215 @@
+# Manus-Notion API Bridge Configuration
+# =====================================
+# 
+# This configuration file controls the behavior of the synchronization system
+# between your local development environment, Notion workspace, and Manus platform.
+#
+# IMPORTANT: Update the API tokens and IDs below with your actual credentials
+# before running the synchronization system.
+
+# Notion Integration Settings
+# ---------------------------
+# Get your Notion token from: https://www.notion.so/my-integrations
+# Get database/page IDs from the URLs in your Notion workspace
+notion_token: "YOUR_NOTION_TOKEN_HERE"
+notion_database_id: "YOUR_DATABASE_ID_HERE"  # Optional: for structured data sync
+notion_parent_page_id: "YOUR_PARENT_PAGE_ID_HERE"  # Where new pages will be created
+
+# Manus Platform Integration Settings
+# -----------------------------------
+# Contact your Manus team for API credentials and endpoint information
+manus_api_endpoint: "https://api.manus.space"
+manus_api_key: "YOUR_MANUS_API_KEY_HERE"
+
+# Synchronization Directories
+# ---------------------------
+source_directory: "C:/CAI-Sync-System/AI-Trading-Platform-Local/AI Trading Platform Memory Export"
+
+# List of directories to monitor and sync
+# Use relative paths from the script location
+sync_directories:
+  - "docs/"
+  - "tasks/"
+  - "assets/"
+  - "presentations/"
+  - "reports/"
+
+# File Exclusion Patterns
+# -----------------------
+# Files matching these patterns will not be synchronized
+excluded_patterns:
+  - "*.tmp"
+  - "*.log"
+  - "*.cache"
+  - ".git/"
+  - "__pycache__/"
+  - "node_modules/"
+  - ".env"
+  - "*.pyc"
+  - ".DS_Store"
+  - "Thumbs.db"
+
+# Synchronization Behavior
+# ------------------------
+sync_interval: 30  # seconds between automatic sync cycles
+enable_bidirectional: true  # Allow changes from Notion to sync back locally
+enable_auto_backup: true  # Create backups before overwriting files
+max_file_size_mb: 50  # Maximum file size to sync (in megabytes)
+
+# Content Processing Options
+# --------------------------
+# Control how different file types are processed during sync
+content_processing:
+  markdown:
+    preserve_formatting: true
+    convert_to_notion_blocks: true
+    include_metadata: true
+  
+  csv:
+    create_notion_database: true
+    update_existing_records: true
+    preserve_formulas: false
+  
+  images:
+    optimize_for_web: true
+    max_width: 1920
+    max_height: 1080
+    quality: 85
+
+# Access Control Settings
+# ----------------------
+# Define access levels for different content types
+access_control:
+  default_level: "internal"  # internal, team, public
+  
+  # Content-specific access levels
+  content_rules:
+    "docs/public/": "public"
+    "docs/internal/": "internal"
+    "tasks/": "team"
+    "presentations/investor/": "team"
+
+# Notification Settings
+# --------------------
+notifications:
+  enable_email: false
+  email_address: "your-email@example.com"
+  
+  enable_slack: false
+  slack_webhook: "YOUR_SLACK_WEBHOOK_URL"
+  
+  # Events that trigger notifications
+  notify_on:
+    - sync_errors
+    - large_file_uploads
+    - access_violations
+
+# Advanced Settings
+# ----------------
+advanced:
+  # API rate limiting
+  api_rate_limit: 10  # requests per second
+  
+  # Retry configuration
+  max_retries: 3
+  retry_delay: 5  # seconds
+  
+  # Logging configuration
+  log_level: "INFO"  # DEBUG, INFO, WARNING, ERROR
+  log_file: "sync.log"
+  max_log_size_mb: 10
+  
+  # Performance tuning
+  batch_size: 10  # files to process in each batch
+  concurrent_uploads: 3  # maximum parallel uploads
+  
+  # Security settings
+  encrypt_local_cache: true
+  verify_ssl_certificates: true
+  
+  # Backup settings
+  backup_directory: "backups/"
+  max_backup_age_days: 30
+  compress_backups: true
+
+# Project-Specific Settings
+# -------------------------
+# These settings are specific to your Bio-Quantum AI project
+project:
+  name: "Bio-Quantum AI Trading Platform"
+  version: "1.0"
+  
+  # Special handling for project files
+  hldd_file: "HLDD_DIMIA_INTEGRATION_PLAN.md"
+  investor_deck: "INVESTOR_CYBERSECURITY_PRESENTATION.md"
+  
+  # Notion workspace organization
+  notion_structure:
+    documentation_page: "Documentation"
+    tasks_database: "Project Tasks"
+    assets_page: "Assets & Media"
+    presentations_page: "Presentations"
+    
+  # Manus integration preferences
+  manus_preferences:
+    auto_assign_tasks: true
+    priority_threshold: 3  # Auto-assign tasks with priority >= 3
+    content_types: ["document", "code", "presentation"]
+
+# Development and Testing
+# ----------------------
+development:
+  enable_debug_mode: false
+  test_mode: false  # If true, no actual API calls are made
+  dry_run: false  # If true, show what would be synced without doing it
+  
+  # Test configuration
+  test_notion_page: "Test Sync Page"
+  test_directory: "test_sync/"
+
+# Integration Hooks
+# ----------------
+# Custom scripts to run at various sync stages
+hooks:
+  pre_sync: null  # Script to run before sync starts
+  post_sync: null  # Script to run after sync completes
+  on_error: null  # Script to run when errors occur
+  
+  # Example hooks (uncomment to use):
+  # pre_sync: "scripts/pre_sync.sh"
+  # post_sync: "scripts/post_sync.sh"
+  # on_error: "scripts/error_handler.sh"
+
+# Monitoring and Analytics
+# ------------------------
+monitoring:
+  enable_metrics: true
+  metrics_file: "sync_metrics.json"
+  
+  # Performance tracking
+  track_sync_times: true
+  track_file_sizes: true
+  track_error_rates: true
+  
+  # Health checks
+  health_check_interval: 300  # seconds
+  health_check_endpoint: "/health"
+
+# Compliance and Audit
+# --------------------
+compliance:
+  enable_audit_log: true
+  audit_log_file: "audit.log"
+  
+  # Data retention
+  retain_deleted_files: true
+  retention_period_days: 90
+  
+  # Privacy settings
+  anonymize_user_data: false
+  encrypt_sensitive_content: true
+  
+  # Regulatory compliance
+  gdpr_compliance: true
+  data_classification: true
+
