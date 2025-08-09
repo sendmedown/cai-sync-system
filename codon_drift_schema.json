@@ -1,0 +1,417 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://bio-quantum.ai/schemas/codon-drift-v1.0.json",
+  "title": "Bio-Quantum Codon Drift Schema",
+  "description": "SPI-compliant schema for codon drift tracking and risk indexing",
+  "version": "1.0.0",
+  "type": "object",
+  
+  "properties": {
+    "driftAnalysis": {
+      "type": "object",
+      "description": "Complete codon drift analysis for a session or strand",
+      "properties": {
+        "sessionId": {
+          "type": "string",
+          "pattern": "^session_[a-zA-Z0-9_]+$",
+          "description": "Unique session identifier"
+        },
+        "strandId": {
+          "type": "string", 
+          "pattern": "^strand_[a-zA-Z0-9_]+$",
+          "description": "DNA memory strand identifier"
+        },
+        "analysisWindow": {
+          "type": "object",
+          "properties": {
+            "startTime": {
+              "type": "integer",
+              "minimum": 0,
+              "description": "Analysis start timestamp (Unix milliseconds)"
+            },
+            "endTime": {
+              "type": "integer", 
+              "minimum": 0,
+              "description": "Analysis end timestamp (Unix milliseconds)"
+            },
+            "duration": {
+              "type": "integer",
+              "minimum": 0,
+              "description": "Analysis window duration in milliseconds"
+            }
+          },
+          "required": ["startTime", "endTime"],
+          "additionalProperties": false
+        },
+        "driftMetrics": {
+          "$ref": "#/$defs/driftMetrics"
+        },
+        "patterns": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/driftPattern"
+          },
+          "description": "Identified drift patterns"
+        },
+        "riskFactors": {
+          "$ref": "#/$defs/riskFactors"
+        },
+        "predictions": {
+          "$ref": "#/$defs/predictions"
+        },
+        "spiCompliance": {
+          "$ref": "#/$defs/spiCompliance"
+        }
+      },
+      "required": ["sessionId", "analysisWindow", "driftMetrics", "spiCompliance"],
+      "additionalProperties": false
+    },
+    
+    "riskIndex": {
+      "type": "object",
+      "description": "SPI-compliant risk index for session",
+      "properties": {
+        "sessionId": {
+          "type": "string",
+          "pattern": "^session_[a-zA-Z0-9_]+$"
+        },
+        "timestamp": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "version": {
+          "type": "string",
+          "pattern": "^\\d+\\.\\d+$",
+          "description": "Risk index schema version"
+        },
+        "overallRiskScore": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1,
+          "description": "Overall risk score (0-1 scale)"
+        },
+        "riskLevel": {
+          "type": "string",
+          "enum": ["low", "medium", "high", "critical"],
+          "description": "Categorical risk level"
+        },
+        "riskCategories": {
+          "type": "object",
+          "properties": {
+            "frequency": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            },
+            "severity": {
+              "type": "number", 
+              "minimum": 0,
+              "maximum": 1
+            },
+            "clustering": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            },
+            "repairFailure": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            },
+            "entropy": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            },
+            "predictability": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            }
+          },
+          "required": ["frequency", "severity", "clustering", "repairFailure"],
+          "additionalProperties": false
+        },
+        "spiTags": {
+          "$ref": "#/$defs/spiTags"
+        }
+      },
+      "required": ["sessionId", "timestamp", "overallRiskScore", "riskLevel", "spiTags"],
+      "additionalProperties": false
+    }
+  },
+  
+  "$defs": {
+    "driftMetrics": {
+      "type": "object",
+      "description": "Comprehensive drift measurement metrics",
+      "properties": {
+        "totalMutations": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Total number of mutations in analysis window"
+        },
+        "mutationRate": {
+          "type": "number",
+          "minimum": 0,
+          "description": "Mutations per hour rate"
+        },
+        "driftVelocity": {
+          "type": "number",
+          "description": "Rate of change in mutation rate"
+        },
+        "driftAcceleration": {
+          "type": "number", 
+          "description": "Rate of change in drift velocity"
+        },
+        "entropyChange": {
+          "type": "number",
+          "description": "Change in mutation entropy over time"
+        },
+        "stabilityIndex": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1,
+          "description": "System stability measurement (0=unstable, 1=stable)"
+        },
+        "repairEfficiency": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1,
+          "description": "Percentage of successful repairs"
+        },
+        "timeToRepair": {
+          "type": "number",
+          "minimum": 0,
+          "description": "Average time to complete repairs (milliseconds)"
+        },
+        "mutationSeverityDistribution": {
+          "type": "object",
+          "properties": {
+            "low": {"type": "integer", "minimum": 0},
+            "medium": {"type": "integer", "minimum": 0},
+            "high": {"type": "integer", "minimum": 0},
+            "critical": {"type": "integer", "minimum": 0}
+          },
+          "additionalProperties": false
+        },
+        "codonTypeDistribution": {
+          "type": "object",
+          "patternProperties": {
+            "^[a-zA-Z_]+$": {
+              "type": "integer",
+              "minimum": 0
+            }
+          },
+          "additionalProperties": false
+        },
+        "temporalClustering": {
+          "type": "object",
+          "properties": {
+            "clusters": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "start": {"type": "integer", "minimum": 0},
+                  "end": {"type": "integer", "minimum": 0},
+                  "count": {"type": "integer", "minimum": 1},
+                  "density": {"type": "number", "minimum": 0}
+                },
+                "required": ["start", "end", "count"],
+                "additionalProperties": false
+              }
+            },
+            "riskScore": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            },
+            "description": {
+              "type": "string"
+            }
+          },
+          "required": ["clusters", "riskScore"],
+          "additionalProperties": false
+        }
+      },
+      "required": ["totalMutations", "mutationRate", "stabilityIndex"],
+      "additionalProperties": false
+    },
+    
+    "driftPattern": {
+      "type": "object",
+      "description": "Identified drift pattern with risk assessment",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "escalating_mutation_rate",
+            "temporal_clustering", 
+            "repair_failure_cascade",
+            "codon_type_bias",
+            "entropy_anomaly",
+            "contextual_drift",
+            "structural_degradation"
+          ],
+          "description": "Type of drift pattern detected"
+        },
+        "riskLevel": {
+          "type": "string",
+          "enum": ["low", "medium", "high", "critical"],
+          "description": "Risk level of this pattern"
+        },
+        "confidence": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1,
+          "description": "Confidence in pattern detection (0-1 scale)"
+        },
+        "description": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 500,
+          "description": "Human-readable pattern description"
+        },
+        "evidence": {
+          "type": "object",
+          "description": "Supporting evidence for pattern detection",
+          "properties": {
+            "dataPoints": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "timestamp": {"type": "integer", "minimum": 0},
+                  "value": {"type": "number"},
+                  "context": {"type": "string"}
+                },
+                "required": ["timestamp", "value"],
+                "additionalProperties": true
+              }
+            },
+            "statisticalSignificance": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            },
+            "correlationFactors": {
+              "type": "array",
+              "items": {"type": "string"}
+            }
+          },
+          "additionalProperties": true
+        },
+        "timeline": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "timestamp": {"type": "integer", "minimum": 0},
+              "event": {"type": "string"},
+              "severity": {
+                "type": "string", 
+                "enum": ["low", "medium", "high", "critical"]
+              }
+            },
+            "required": ["timestamp", "event"],
+            "additionalProperties": false
+          }
+        },
+        "impact": {
+          "type": "object",
+          "properties": {
+            "systemStability": {
+              "type": "string",
+              "enum": ["minimal", "moderate", "significant", "severe"]
+            },
+            "repairComplexity": {
+              "type": "string",
+              "enum": ["simple", "moderate", "complex", "critical"]
+            },
+            "resourceRequirements": {
+              "type": "string",
+              "enum": ["low", "medium", "high", "critical"]
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "required": ["type", "riskLevel", "confidence", "description"],
+      "additionalProperties": false
+    },
+    
+    "riskFactors": {
+      "type": "object",
+      "description": "Comprehensive risk factor analysis",
+      "properties": {
+        "overall": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1,
+          "description": "Overall risk score"
+        },
+        "categories": {
+          "type": "object",
+          "properties": {
+            "frequency": {"type": "number", "minimum": 0, "maximum": 1},
+            "severity": {"type": "number", "minimum": 0, "maximum": 1},
+            "clustering": {"type": "number", "minimum": 0, "maximum": 1},
+            "repairFailure": {"type": "number", "minimum": 0, "maximum": 1},
+            "entropy": {"type": "number", "minimum": 0, "maximum": 1},
+            "predictability": {"type": "number", "minimum": 0, "maximum": 1}
+          },
+          "required": ["frequency", "severity"],
+          "additionalProperties": false
+        },
+        "details": {
+          "type": "object",
+          "patternProperties": {
+            "^[a-zA-Z]+Analysis$": {
+              "type": "string",
+              "description": "Human-readable analysis of risk factor"
+            }
+          },
+          "additionalProperties": false
+        },
+        "trends": {
+          "type": "object",
+          "properties": {
+            "improving": {
+              "type": "array",
+              "items": {"type": "string"}
+            },
+            "degrading": {
+              "type": "array", 
+              "items": {"type": "string"}
+            },
+            "stable": {
+              "type": "array",
+              "items": {"type": "string"}
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "required": ["overall", "categories"],
+      "additionalProperties": false
+    },
+    
+    "predictions": {
+      "type": "object",
+      "description": "Predictive analysis of future drift patterns",
+      "properties": {
+        "nextHour": {
+          "$ref": "#/$defs/timePeriodPrediction"
+        },
+        "next24Hours": {
+          "$ref": "#/$defs/timePeriodPrediction"
+        },
+        "nextWeek": {
+          "$ref": "#/$defs/timePeriodPrediction"
+        },
+        "confidence": {
+          "type": "object",
+          "properties": {
+            "mutationRate": {"type": "number", "minimum": 0, "maximum": 1},
+            "severity": {"
