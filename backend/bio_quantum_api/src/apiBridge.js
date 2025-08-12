@@ -1,0 +1,230 @@
+﻿require('dotenv').config();
+const express = require('express');
+const cors = require('cors');
+const jwt = require('jsonwebtoken');
+const { WebSocketServer } = require('ws');
+const { v4: uuidv4 } = require('uuid');
+const redis = require('redis');
+const SecurityWatchdog = require('./SecurityWatchdog');
+const FederatedThreatSync = require('./FederatedThreatSync');
+const SecurityNetworkWatchdog = require('./SecurityNetworkWatchdog');
+const FederatedThreatSyncProtocol = require('./FederatedThreatSyncProtocol');
+const KMNuggetValidationEngine = require('./KMNuggetValidationEngine');
+const WebSocketEventManager = require('../ws/WebSocketEventManager');
+const securityMiddleware = require('../middleware/securityMiddleware');
+const CrossSessionValidator = require('../validation/CrossSessionValidator');
+
+const app = express();
+const watchdog = new SecurityWatchdog();
+const threatSync = new FederatedThreatSync();
+const networkWatchdog = new SecurityNetworkWatchdog({
+  codonGenerator: require('./CodonGenerator'),
+  validationEngine: new KMNuggetValidationEngine(),
+  crossSessionValidator: new CrossSessionValidator()
+});
+const threatSyncProtocol = new FederatedThreatSyncProtocol({
+  agentId: 'grok',
+  codonGenerator: require('./CodonGenerator'),
+  securityWatchdog: watchdog
+});
+const wsEventManager = new WebSocketEventManager();
+
+app.use(cors());
+app.use(express.json());
+app.use(securityMiddleware.authenticateJWT);
+app.use(securityMiddleware.rateLimit);
+app.use((req, res, next) => watchdog.monitorRequest(req, res, next));
+app.use((req, res, next) => networkWatchdog.trackRequest(req, res, next));
+
+const fs = require('fs');
+const path = require('path');
+const logFile = path.join(__dirname, 'apiBridge.log');
+
+function log(message, level = 'INFO') {
+  const timestamp = new Date().toISOString();
+  fs.appendFileSync(logFile, `[${timestamp}] ${level}: ${message}\n`);
+}
+
+log('Starting API Bridge server...');
+
+const dnaStrands = new Map();
+global.wss = new WebSocketServer({ port: 5003 });
+
+wss.on('connection', (ws, req) => {
+  const token = req.url.split('token=')[1];
+  try {
+    jwt.verify(token, process.env.JWT_SECRET || 'dummy_jwt_secret_123');
+    ws.sessionId = uuidv4();
+    log(`WebSocket connected, sessionId: ${ws.sessionId}`);
+  } catch (err) {
+    ws.close();
+    log(`WebSocket connection failed: ${err.message}`, 'ERROR');
+  }
+});
+
+app.get('/health', (req, res) => {
+  res.status(200).json({ status: 'ready' });
+});
+
+app.post('/nugget/create', (req, res) => {
+  const { userId, content, promptId, context } = req.body;
+  const token = req.headers.authorization?.split(' ')[1];
+  try {
+    jwt.verify(token, process.env.JWT_SECRET || 'dummy_jwt_secret_123');
+    if (!userId || !content || !promptId || !context?.sessionId) {
+      throw new Error('Missing required fields');
+    }
+    const nuggetId = uuidv4();
+    const sessionId = context.sessionId;
+    const codon = {
+      nuggetId,
+      content,
+      promptId,
+      type: 'Condition',
+      origin: 'User',
+      timestamp: new Date().toISOString()
+    };
+    const strand = dnaStrands.get(sessionId) || { sessionId, codons: [] };
+    strand.codons.push(codon);
+    dnaStrands.set(sessionId, strand);
+    
+    wss.clients.forEach(client => {
+      if (client.sessionId === sessionId) {
+        client.send(JSON.stringify({ type: 'nugget_update', ...codon, requestId: uuidv4() }));
+      }
+    });
+    
+    wsEventManager.emit('security_event', { type: 'nugget_created', nuggetId, sessionId });
+    res.status(200).json({ status: 'success', nuggetId, sessionId, requestId: uuidv4() });
+    log(`Nugget created: ${nuggetId}, session: ${sessionId}`);
+  } catch (err) {
+    res.status(401).json({ error: err.message || 'Invalid JWT', requestId: uuidv4() });
+    log(`Nugget create failed: ${err.message}`, 'ERROR');
+  }
+});
+
+app.post('/security/event', (req, res) => {
+  const { event } = req.body;
+  wsEventManager.emit('security_event', event);
+  res.status(200).json({ status: 'broadcasted' });
+});
+
+app.post('/security/incident', (req, res) => {
+  const { incident } = req.body;
+  wsEventManager.emit('security_incident', incident);
+  res.status(200).json({ status: 'broadcasted' });
+});
+
+app.post('/sync/threat', (req, res) => {
+  const { signature } = req.body;
+  try {
+    if (!signature.vectorHash || !signature.timestamp || !signature.sessionSource || !signature.riskLevel) {
+      throw new Error('Invalid threat signature format');
+    }
+    threatSync.handleMessage(null, JSON.stringify({ type: 'threat_signature', signature }));
+    wsEventManager.emit('threat_signature', signature);
+    res.status(200).json({ status: 'received', syncedAt: new Date().toISOString() });
+  } catch (err) {
+    res.status(400).json({ error: err.message });
+  }
+});
+
+app.get('/sync/threat/pull', (req, res) => {
+  const { after } = req.query;
+  const fingerprints = threatSync.threatLedger.filter(f => !after || f.syncedAt > after);
+  res.status(200).json({ fingerprints });
+});
+
+app.post('/validate', (req, res) => {
+  const { nugget, comparisonSet } = req.body;
+  try {
+    const validator = new KMNuggetValidationEngine();
+    const result = validator.validate(nugget, comparisonSet || []);
+    res.status(200).json(result);
+  } catch (err) {
+    res.status(400).json({ error: err.message });
+  }
+});
+
+app.post('/batch-validate', (req, res) => {
+  const { nuggets, comparisonSet } = req.body;
+  try {
+    const validator = new KMNuggetValidationEngine();
+    const results = nuggets.map(nugget => validator.validate(nugget, comparisonSet || []));
+    res.status(200).json(results);
+  } catch (err) {
+    res.status(400).json({ error: err.message });
+  }
+});
+
+app.post('/report/compliance', (req, res) => {
+  const complianceData = {
+    spiCompliance: true,
+    validatedNuggets: [],
+    timestamp: new Date().toISOString()
+  };
+  res.status(200).json(complianceData);
+});
+
+app.get('/security/alerts', (req, res) => {
+  const alerts = [
+    { id: '1', type: 'jwt_failure', severity: 'medium', timestamp: new Date().toISOString() },
+    { id: '2', type: 'rate_limit', severity: 'low', timestamp: new Date().toISOString() },
+    { id: '3', type: 'codon_mutation', severity: 'high', timestamp: new Date().toISOString() }
+  ];
+  res.status(200).json({ alerts });
+});
+
+app.get('/mutation/timeline', (req, res) => {
+  const mutationReplayEvents = [
+    { id: '1', type: 'codon_created', timestamp: new Date().toISOString(), sequence: 'ATCG' },
+    { id: '2', type: 'mutation_detected', timestamp: new Date().toISOString(), sequence: 'ATCC' },
+    { id: '3', type: 'repair_initiated', timestamp: new Date().toISOString(), sequence: 'ATCG' }
+  ];
+  res.status(200).json({ mutationReplayEvents });
+});
+
+app.get('/metrics', (req, res) => {
+  const metrics = {
+    jwtFailures: Math.floor(Math.random() * 10),
+    replayAttacks: Math.floor(Math.random() * 5),
+    codonMutationRate: Math.random() * 100,
+    memoryCorrectionSuccess: 85 + Math.random() * 15,
+    activeNuggetThreads: Math.floor(Math.random() * 20),
+    topCodonDrift: 'ATCG->ATCC',
+    memoryRepairs: Math.floor(Math.random() * 50)
+  };
+  res.status(200).json(metrics);
+});
+
+const metricsWss = new WebSocketServer({ port: 5004 });
+metricsWss.on('connection', (ws, req) => {
+  const token = req.url.split('token=')[1];
+  try {
+    jwt.verify(token, process.env.JWT_SECRET || 'dummy_jwt_secret_123');
+    
+    const interval = setInterval(() => {
+      const metrics = {
+        type: 'metrics_update',
+        jwtFailures: Math.floor(Math.random() * 10),
+        replayAttacks: Math.floor(Math.random() * 5),
+        codonMutationRate: Math.random() * 100,
+        memoryCorrectionSuccess: 85 + Math.random() * 15,
+        activeNuggetThreads: Math.floor(Math.random() * 20),
+        topCodonDrift: 'ATCG->ATCC',
+        memoryRepairs: Math.floor(Math.random() * 50),
+        timestamp: Date.now()
+      };
+      ws.send(JSON.stringify(metrics));
+    }, 5000);
+    
+    ws.on('close', () => clearInterval(interval));
+  } catch (err) {
+    ws.close();
+  }
+});
+
+app.listen(10000, () => {
+  console.log('ðŸš€ API Bridge server listening on port 10000');
+  log('API Bridge server started on port 10000');
+});
