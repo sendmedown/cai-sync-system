@@ -27,3 +27,27 @@ frontend/bio-quantum-ui/out/
 
 # python
 __pycache__/
+# === repo hygiene ===
+# vendor pack & bundles
+backend/bio_quantum_api/bio_quantum_api_minimal/
+backend/bio_quantum_api/bio_quantum_api_minimal.zip
+
+# local scripts, scratch, logs
+backend/bio_quantum_api/preflight.ps1
+backend/bio_quantum_api/dev/
+backend/debug-tree.sh
+debug-tree.sh
+expand_security_pack.ps1
+*.log
+
+# dumps and odd scratch files
+claude_dump.*
+claude_phase2_sync.bat
+ws.close()
+\{        # literal file named {
+\[data.event
+"console.log('*
+
+# big media
+video/
+backend/GenesisAiX_OODB_vs_SQL_Phase8.pdf

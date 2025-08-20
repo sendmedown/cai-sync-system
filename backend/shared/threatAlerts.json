@@ -1,0 +1,26 @@
+[
+  {
+    "id": "d8039edc-d9fb-4a90-9531-7520fe02b91b",
+    "timestamp": "2025-08-19T03:39:21.567Z",
+    "ip": "::1",
+    "sessionId": "unknown",
+    "threatLevel": "critical",
+    "eventType": "missing_jwt"
+  },
+  {
+    "id": "907b72e0-b272-4ccd-875e-ceae1775a782",
+    "timestamp": "2025-08-19T03:41:57.887Z",
+    "ip": "::1",
+    "sessionId": "unknown",
+    "threatLevel": "critical",
+    "eventType": "missing_jwt"
+  },
+  {
+    "id": "0f432004-8da0-46e8-95e4-e4340293e5b3",
+    "timestamp": "2025-08-19T03:41:57.901Z",
+    "ip": "::1",
+    "sessionId": "unknown",
+    "threatLevel": "critical",
+    "eventType": "missing_jwt"
+  }
+]
