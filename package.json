@@ -3,17 +3,35 @@
   "version": "1.0.0",
   "description": "API Bridge Server for Bio-Quantum AI Trading Platform",
   "main": "apiBridge.js",
-  "type": "module",
   "scripts": {
+    "dev:bridge": "node backend/bio_quantum_api/src/apiBridge.clean.js",
     "start": "node apiBridge.js"
   },
   "dependencies": {
     "cors": "^2.8.5",
     "dotenv": "^16.3.1",
-    "express": "^4.18.2",
+    "express": "^4.21.2",
+    "express-graphql": "^0.12.0",
+    "graphql": "^15.10.1",
     "jsonwebtoken": "^9.0.2",
-    "redis": "^4.6.7",
+    "multer": "^2.0.2",
+    "redis": "^4.7.1",
     "uuid": "^9.0.1",
     "ws": "^8.18.3"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/richa/bio-quantum-trading-platform-clean.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/richa/bio-quantum-trading-platform-clean/issues"
+  },
+  "homepage": "https://github.com/richa/bio-quantum-trading-platform-clean#readme",
+  "devDependencies": {
+    "jest": "^30.0.5",
+    "supertest": "^7.1.4"
   }
 }

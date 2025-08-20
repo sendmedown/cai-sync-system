@@ -1,0 +1,14 @@
+const { URL } = require('url');
+const net = require('net');
+const { HOST_ALLOWLIST, PRIVATE_CIDRS, PROMPT_INJECTION_PATTERNS, UNICODE_BLOCKLIST } = require('./allowlists');
+function ipToNum(x){return x.split('.').reduce((a,b)=>(a<<8)+(+b&255),0)>>>0;}
+function ipInCidr(ipStr,{cidr,mask}){try{const ip=net.isIP(ipStr);if(!ip)return false;if(ip===4){const ipNum=ipToNum(ipStr),base=ipToNum(cidr),m=-1<<(32-mask);return (ipNum&m)===(base&m);}return ipStr===cidr&&mask===128;}catch{return false;}}
+function isRawIpHost(h){return net.isIP(h)!==0;}
+function hostAllowed(u){const h=u.hostname.toLowerCase();if(isRawIpHost(h))return false;return HOST_ALLOWLIST.has(h);}
+function hasPrivateTarget(u){const h=u.hostname;if(isRawIpHost(h))return PRIVATE_CIDRS.some(c=>ipInCidr(h,c));return /169\.254\.169\.254/.test(u.href);}
+function scorePI(s){if(!s||typeof s!=='string')return 0;let sc=0;for(const rx of PROMPT_INJECTION_PATTERNS){if(rx.test(s))sc+=1;}return Math.min(sc,5);}
+function scrubUnicode(s){return typeof s==='string'?s.replace(UNICODE_BLOCKLIST,''):s;}
+function extract(req){const out=[];const push=(o,p)=>{if(!o)return;if(typeof o==='string')out.push({path:p,value:o});else if(typeof o==='object'){for(const[k,v]of Object.entries(o)){if(typeof v==='string')out.push({path:`${p}.${k}`,value:v});else if(typeof v==='object')push(v,`${p}.${k}`)}}};push(req.body,'body');push(req.query,'query');push(req.headers,'headers');return out;}
+function parseUrls(s){const urls=[];const rx=/\bhttps?:\/\/[^\s"'<>]+/ig;let m;while((m=rx.exec(s))!==null){try{urls.push(new URL(m[0]));}catch{}}return urls;}
+function aiFirewall(opts={}){const TH=opts.blockThreshold??2;const DRY=opts.dryRun===true;return function(req,res,next){const findings=[];let score=0;for(const f of extract(req)){const before=f.value,after=scrubUnicode(before);if(before!==after){findings.push({type:'unicode_scrub',path:f.path});if(f.path.startsWith('body')){const keys=f.path.split('.').slice(1);let node=req.body;for(let i=0;i<keys.length-1;i++)node=node?.[keys[i]];if(node&&typeof node==='object')node[keys.at(-1)]=after;}}const s=after;const inc=scorePI(s);if(inc>0)findings.push({type:'prompt_injection',path:f.path,inc});score+=inc;for(const u of parseUrls(s)){if(!hostAllowed(u)){findings.push({type:'host_not_allowlisted',url:u.hostname});score+=2;}if(hasPrivateTarget(u)){findings.push({type:'private_target',url:u.href});score+=3;}if(/^data:|^file:|^javascript:/i.test(u.href)){findings.push({type:'scheme_blocked',url:u.href});score+=3;}}}if((req.headers['x-mcp-request']||'').toString().toLowerCase()==='enable'){findings.push({type:'mcp_enable_blocked'});score+=3;}req.security={findings,score,blocked:!DRY&&score>=TH};if(req.security.blocked){return res.status(400).json({error:'ai_firewall_block',score,findings});}next();};}
+module.exports={aiFirewall};

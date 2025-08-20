@@ -1,0 +1,5 @@
+const { v4: uuid } = require('uuid');
+function defaultCapabilities(){return {tools:new Set(['read_market_data','propose_order','backtest']),venues:new Set(['BINANCE','COINBASE']),maxNotional:50000,allowWrite:false};}
+function reasonCapabilities(base,security){const caps={...base,tools:new Set(base.tools),venues:new Set(base.venues)};if(security?.score>=2){caps.allowWrite=false;caps.maxNotional=Math.min(caps.maxNotional,5000);caps.tools.delete('propose_order');}if(security?.score>=4){caps.tools=new Set(['read_market_data']);caps.venues=new Set();}return caps;}
+function threadGuard(){return function(req,_res,next){const id=req.headers['x-thread-id']||uuid();const base=defaultCapabilities();const caps=reasonCapabilities(base,req.security);req.thread={id,caps:{tools:Array.from(caps.tools),venues:Array.from(caps.venues),maxNotional:caps.maxNotional,allowWrite:caps.allowWrite}};next();};}
+module.exports={ threadGuard, defaultCapabilities, reasonCapabilities };

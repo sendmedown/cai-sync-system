@@ -1,11 +1,18 @@
 services:
   - type: web
-    name: bio-quantum-api
-    env: node
-    rootDir: .
-    buildCommand: npm install
-    startCommand: node apiBridge_with_token_endpoint.cjs
+    name: bio-quantum-deployment
+    runtime: node  # Changed to Node.js for apiBridge.js
+    repo: https://github.com/sendmedown/bio-quantum-deployment
+    plan: starter
+    region: virginia
+    buildCommand: cd backend/bio_quantum_api && npm install  # Node.js build; add pip if needed
+    startCommand: node backend/bio_quantum_api/apiBridge.js  # Correct path
     envVars:
+      - key: PORT
+        value: 10000
+      - key: NODE_ENV
+        value: production
       - key: NODE_VERSION
-        value: 22.1.0
-
+        value: 22.x
+    autoDeployTrigger: commit
+version: "1"
