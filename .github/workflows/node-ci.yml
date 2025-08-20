@@ -1,0 +1,27 @@
+﻿name: Node CI
+
+on:
+  push:
+    branches: [ main, dev, feature/**, claude_recovery ]
+  pull_request:
+    branches: [ main, dev ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: backend/bio_quantum_api
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'npm'
+          cache-dependency-path: backend/bio_quantum_api/package-lock.json
+      - run: npm ci
+      # If this file exists, keep; otherwise remove this next line
+      - run: node ../../tools/unicode_guard.js . --ci
+      - run: npx jest --runInBand
+        env:
+          JWT_SECRET: dev_dummy_123
