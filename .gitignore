@@ -11,3 +11,19 @@ sbom.json__bq_tmp/
 *.log
 node_modules/
 bq_deliverables/
+# common
+node_modules/
+dist/
+build/
+coverage/
+.env
+*.log
+*.zip
+__bq_tmp/
+
+# frontend
+frontend/bio-quantum-ui/.next/
+frontend/bio-quantum-ui/out/
+
+# python
+__pycache__/
