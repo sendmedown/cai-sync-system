@@ -2,9 +2,22 @@
 
 on:
   push:
-    branches: [ main, dev, feature/**, claude_recovery ]
+    branches: ["**"]
+    paths:
+      - "backend/**"
+      - "tools/unicode_guard.js"
+      - "package.json"
+      - "package-lock.json"
+      - ".github/workflows/node-ci.yml"
   pull_request:
-    branches: [ main, dev ]
+    branches: ["**"]
+    paths:
+      - "backend/**"
+      - "tools/unicode_guard.js"
+      - "package.json"
+      - "package-lock.json"
+      - ".github/workflows/node-ci.yml"
+  workflow_dispatch:
 
 jobs:
   test:
@@ -19,9 +32,14 @@ jobs:
           node-version: '22'
           cache: 'npm'
           cache-dependency-path: backend/bio_quantum_api/package-lock.json
+
       - run: npm ci
-      # If this file exists, keep; otherwise remove this next line
-      - run: node ../../tools/unicode_guard.js . --ci
-      - run: npx jest --runInBand
+
+      - name: Unicode guard
+        if: ${{ hashFiles('tools/unicode_guard.js') != '' }}
+        run: node ../../tools/unicode_guard.js . --ci
+
+      - name: Run tests
+        run: npx jest --runInBand
         env:
           JWT_SECRET: dev_dummy_123
