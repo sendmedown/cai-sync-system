@@ -1,0 +1,23 @@
+name: ci
+on: [push, pull_request]
+jobs:
+  build-test-secure:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: '20', cache: 'npm' }
+      - run: npm ci --ignore-scripts
+        working-directory: ./backend/bio_quantum_api
+      - run: npx eslint .
+        working-directory: ./backend/bio_quantum_api
+      - run: node ../../tools/unicode_guard.js ./
+        working-directory: ./backend/bio_quantum_api
+      - run: npm test --runInBand
+        working-directory: ./backend/bio_quantum_api
+      - uses: github/osv-scanner-action@v1
+        with: { scan-args: "-r ./backend/bio_quantum_api" }
+      - run: npx @cyclonedx/cyclonedx-npm --output-format json --output-file sbom.json
+        working-directory: ./backend/bio_quantum_api
+      - uses: actions/upload-artifact@v4
+        with: { name: sbom, path: ./backend/bio_quantum_api/sbom.json }

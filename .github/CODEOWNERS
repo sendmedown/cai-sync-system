@@ -1,0 +1,7 @@
+/backend/bio_quantum_api/package.json   @security-reviewers
+/backend/bio_quantum_api/package-lock.json @security-reviewers
+/.github/workflows/**                   @security-reviewers
+/backend/bio_quantum_api/middleware/**  @security-reviewers
+/backend/**                             @core-backend
+/frontend/**                            @core-frontend
+/docs/**                                @docs-team
